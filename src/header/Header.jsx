@@ -52,7 +52,7 @@ function Header() {
                 </ul>
             </div>
         </section>
-        <section id='headersection1' className=' flex  items-center py-[30px] '>
+        <section id='headersection1' className='bg-red-600 flex  items-center py-[30px] '>
             <div className='bp600:w-[87%] w-[95%] m-[auto] flex justify-between'>
                 <div className='flex items-center justify-between w-[100%]'>
                     <img src="./img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
