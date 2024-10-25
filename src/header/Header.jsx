@@ -101,10 +101,10 @@ function Header() {
                             <IoMdArrowDropdown />
                             <div className='absolute top-full hidden group-hover:flex flex-col bg-white p-2 space-x-2 w-[250px] rounded-b-lg transition-all ease-in-out duration-600 shadow-lg'>
                                 <div className='flex'>
-                                    <span className='text-black p-[15px]'>Meyvə</span>
+                                    <span className='text-black p-[15px]'>Siyasətimiz</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <span className='text-black p-[10px]'>Tərəvəz</span>
+                                    <span className='text-black p-[10px]'>Yeniliklər</span>
                                 </div>
                             </div>                       
                         </li>
@@ -113,10 +113,13 @@ function Header() {
                             <IoMdArrowDropdown />
                             <div className='absolute top-full hidden group-hover:flex flex-col bg-white p-2 shadow-lg space-x-2 w-[250px] rounded-b-lg  transition-all ease-in-out duration-600'>
                                 <div className='flex'>
-                                    <span className='text-black p-[15px]'>Meyvə</span>
+                                    <span className='text-black p-[15px]'>Kampaniyalar</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <span className='text-black p-[10px]'>Tərəvəz</span>
+                                    <span className='text-black p-[10px]'>Neptun bonus kart</span>
+                                </div>
+                                <div className='flex items-center'>
+                                    <span className='text-black p-[10px]'>Elektron katalog</span>
                                 </div>
                             </div>
                         
