@@ -82,7 +82,7 @@ function Header() {
 
         </section>
         
-        <section id='headersection2' className=' bg-[#e62b2b] flex text-white  justify-between items-center shadow-lg shadow-gray-400 '>
+        <section id='headersection2' className=' bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 '>
             <div className='w-[87%] m-[auto] flex h-[50px]  justify-between'>
                 <div className='-m-[10px] '>
                     <div onClick={()=>handlecategorymenu()}>

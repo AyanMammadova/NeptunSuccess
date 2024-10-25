@@ -50,7 +50,7 @@ function Sidebar() {
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
                                             <div key={subi} className='flex'>
-                                                    <span  className='text-black p-[15px]'>{subitem.categoryName}</span>
+                                                    <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
                                             </div>
                                         ))
                                     }
