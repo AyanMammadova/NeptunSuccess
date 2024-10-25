@@ -52,7 +52,7 @@ function Header() {
                 </ul>
             </div>
         </section>
-        <section id='headersection1' className='bg-red-600 flex  items-center py-[30px] '>
+        <section id='headersection1' className=' flex  items-center py-[30px] '>
             <div className='bp600:w-[87%] w-[95%] m-[auto] flex justify-between'>
                 <div className='flex items-center justify-between w-[100%]'>
                     <img src="./img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
@@ -82,7 +82,7 @@ function Header() {
 
         </section>
         
-        <section id='headersection2' className=' bg-[#e623ab] flex text-white  justify-between items-center shadow-lg shadow-gray-400 '>
+        <section id='headersection2' className=' bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 '>
             <div className='w-[87%] m-[auto] flex h-[50px]  justify-between'>
                 <div className='-m-[10px] '>
                     <div onClick={()=>handlecategorymenu()}>
