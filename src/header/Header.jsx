@@ -81,8 +81,7 @@ function Header() {
             </div>
 
         </section>
-        
-        <section id='headersection2' className=' bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 '>
+        <section id='headersection2' className='relative bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 '>
             <div className='w-[87%] m-[auto] flex h-[50px]  justify-between'>
                 <div className='-m-[10px] '>
                     <div onClick={()=>handlecategorymenu()}>
@@ -182,8 +181,13 @@ function Header() {
             </div>
             
         </section>
-        <div id='slidingcategory' className={` w-[40%] fixed z-50 ${showcategorymenu ? 'block' : 'hidden'}`}>
-            <Sidebar/>
+        <div >
+            <div className='absolute top-[210px]'>
+                <div id='slidingcategory'  className={`fixed top-[210px] z-50 h-full w-[40%] transition-transform duration-500 
+                    ${showcategorymenu ? 'translate-x-0' : '-translate-x-full'}`}>
+                    <Sidebar/>
+                </div>
+            </div>
         </div>
 
       
