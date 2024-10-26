@@ -46,7 +46,7 @@ function Sidebar() {
                             </div>
                             <IoIosArrowForward />
                             {item.subcategory ? 
-                             <div className='absolute left-full top-0 z-50 hidden group-hover:flex flex-col bg-white p-2 shadow-lg space-x-2 w-[250px] border-x-2 border-l-[#FF8300] border-r-[gray] transition-all ease-in-out duration-600'>
+                             <div className='absolute left-[150px] sm:left-full top-0 z-50 hidden group-hover:flex flex-col bg-white p-2 shadow-lg space-x-2 w-[250px] border-x-2 border-l-[#FF8300] border-r-[gray] transition-all ease-in-out duration-600'>
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
                                             <div key={subi} className='flex'>
