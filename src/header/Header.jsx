@@ -154,9 +154,9 @@ function Header() {
                           return <li key={i} className='relative  cursor-pointer group'>
                                     <span className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
                                       {item.menuName} 
-                                      {item.submenu.length>1 && item.showdrops ?
-                                      <FaMinusSquare  onClick={()=>changedropstatus(i)} className={` text-[#FF8300] ${item.submenu ? 'block' : 'hidden'}`} /> :
-                                      <FaPlusSquare  onClick={()=>changedropstatus(i)} className={`text-[#FF8300] ${item.submenu ? 'block' : 'hidden'}`} /> 
+                                      {item.showdrops ?
+                                      <FaMinusSquare  onClick={()=>changedropstatus(i)} className={` text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> :
+                                      <FaPlusSquare  onClick={()=>changedropstatus(i)} className={`text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> 
                                       }
                                       </span>
                                           
@@ -217,7 +217,7 @@ function Header() {
                         </div>
                     </div>
                     <div id='menu' className='hidden xl:flex'>
-                        <ul className='flex items-center h-[50px] gap-[25px] text-[.8em] font-[500]'>
+                        <ul className='flex items-center h-[50px] gap-[25px] z-50 text-[.8em] font-[500]'>
                             {
                                 menuData.map((item,i)=>{
                                     return <li key={i} className='relative flex items-center h-[50px] cursor-pointer hover:text-[#EEEEEE] group'>
