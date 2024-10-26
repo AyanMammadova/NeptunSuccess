@@ -7,3 +7,20 @@
   box-sizing: border-box;
   /* background-color: #000000b3; */
 }
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  color: #FF8300;
+  transform: scale(0.5);
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  padding: 100px;
+  top: 30%;
+  font-weight: bold;
+}
+.mySwiper .swiper-button-next{
+  right: -90px;
+}
+.mySwiper .swiper-button-prev{
+  left: -90px;
+}

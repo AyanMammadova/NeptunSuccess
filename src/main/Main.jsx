@@ -2,12 +2,40 @@ import React from 'react'
 import { BsArrowRight } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
-
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 function Main() {
   return (
     <main className='bg-[#dbd7d7]'>
       <div className='lg:ml-[350px] 2xl:ml-[400px]'>
-        <img className=' pt-[20px] object-contain w-[90%] mx-[auto]' src="https://neptun.az/image/cache/webp/catalog/08.09.2024/mainbanner65afaaf3ef334cb2f90f3816-1130x413.webp?v=9" alt="" />
+        <div className='pt-[20px] w-[90%] mx-[auto]'>
+        <Swiper
+          spaceBetween={30}
+          centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide><img className='w-[100%] object-contain' src="https://neptun.az/image/cache/webp/catalog/09.18.2024/banner-17-29-oktyabr-kataloq-1130x413.webp?v=9" alt="" /></SwiperSlide>
+          <SwiperSlide><img className='w-[100%] object-contain'  src="https://neptun.az/image/cache/webp/catalog/2.2024/esas-1130x413.webp?v=9" alt="" /></SwiperSlide>
+          <SwiperSlide><img className='w-[100%] object-contain'  src="https://neptun.az/image/cache/webp/catalog/2.2024/heftesonu-banner-cover2-1130x413.webp?v=9" alt="" /></SwiperSlide>
+          <SwiperSlide><img className='w-[100%] object-contain'  src="https://neptun.az/image/cache/webp/catalog/08.09.2024/mainbanner65afaaf3ef334cb2f90f3816-1130x413.webp?v=9" alt="" /></SwiperSlide>
+          <SwiperSlide><img className='w-[100%] object-contain'  src="https://neptun.az/image/cache/webp/catalog/09.18.2024/banner-17-29-oktyabr-kataloq-1130x413.webp?v=9" alt="" /></SwiperSlide>
+          
+        </Swiper>
+   
+        </div>
+        
         <div className='flex gap-[10px] justify-between w-[90%]  pb-[50px] mx-[auto]  mt-[20px]'>
           <div className='bg-white'>
             <div className="relative inline-block">

@@ -10,6 +10,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import Sidebar from '../sidebar/Sidebar';
 import { FaPlusSquare } from "react-icons/fa";
+import { FaMinusSquare } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { BiMenuAltLeft } from "react-icons/bi";
 
@@ -124,49 +125,55 @@ function Header() {
       
     const [showcategorymenu,setShowcategorymenu]=useState(false)
     const [showmenu,setShowmenu]=useState(false)
-    const [menuData,setMenudata]=useState(menudatam)
+    const [menuData,setMenudata]=useState(menudatam.map(item=>({...item,showdrops:false})))
     const [isfilled,setIsfilled]=useState('')
     function handlesidemenu(){
+      handlecategorymenu()
         setShowmenu(!showmenu)
-        console.log(showmenu)
+        // console.log(showmenu)
     }
     function handlecategorymenu(){
         setShowcategorymenu(!showcategorymenu)
     }
     function changedropstatus(index){
         // console.log(menuData[index])
-        const newMenuData=menuData.map()
+        const newMenuData=menuData.map((item,i)=>
+          i==index ? {...item,showdrops:!item.showdrops} :item
+        )
+        setMenudata(newMenuData)
+        console.log(newMenuData)
     }
 
     return (
         <header className=''>
             <section id='slidingmenu'>
-                <div className={` w-[40%]  relative ${showmenu? 'block' : 'hidden'}`}>
-                    <ul className='flex flex-col  h-[100vh] border-r-2 shadow-2xl p-[40px] w-[40%] bg-white fixed z-50 text-[1em] font-[400] '>
+                <div className={` w-[50%] z-50  relative ${showmenu? 'block' : 'hidden'}  xl:hidden`}>
+                    <ul className='flex flex-col  h-[100vh] border-r-2 shadow-2xl p-[40px] w-[80%] sm:w-[50%]  bg-white fixed z-50 text-[1em] font-[400] '>
                         <IoCloseCircleOutline onClick={()=>handlesidemenu()}  className='absolute right-[10px]  top-[10px] cursor-pointer text-[1.5em]'/>
-                        {
-                            menuData.map((item,i)=>{
-                                return <li key={i} className='relative  cursor-pointer group'>
-                                            <span className='border-b-2 m-[20px] w-[100%] flex items-center justify-between py-[5px]'>{item.menuName} <FaPlusSquare  onClick={()=>changedropstatus(i)} className=' text-[#FF8300]'/></span>
-                                                
-                                            { item.showmenudrops ? (
-                                                <>
-                                                    <ul>
-                                                        {
-                                                        item.submenu.map((subitem,subi)=>(
-                                                            <li key={subi}>{subitem.menuName}</li>
-                                                        ))
-                                                        }
-                                                    </ul> 
-                                                </>
-                                            ) :'' }               
-                                        </li>
-                            })
-                        }
-                        
-                        
-                        
-                        
+                        {menuData.map((item,i)=>{
+                          return <li key={i} className='relative  cursor-pointer group'>
+                                    <span className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
+                                      {item.menuName} 
+                                      {item.submenu.length>1 && item.showdrops ?
+                                      <FaMinusSquare  onClick={()=>changedropstatus(i)} className={` text-[#FF8300] ${item.submenu ? 'block' : 'hidden'}`} /> :
+                                      <FaPlusSquare  onClick={()=>changedropstatus(i)} className={`text-[#FF8300] ${item.submenu ? 'block' : 'hidden'}`} /> 
+                                      }
+                                      </span>
+                                          
+                                      { item.showdrops ? (
+                                          <>
+                                              <ul>
+                                                  {
+                                                  item.submenu.map((subitem,subi)=>(
+                                                      <li className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</li>
+                                                  ))
+                                                  }
+                                              </ul> 
+                                          </>
+                                      ) :'' }               
+                                  </li>
+                          })
+                        }  
                     </ul>
                 </div>
             </section>
@@ -264,8 +271,7 @@ function Header() {
                 </div>
                 
             </section>
-            
-            <div id='slidingcategory'  className={`fixed  z-50 h-full w-[40%]
+            <div id='slidingcategory'  className={`fixed  z-40 h-full w-[40%] lg:hidden
                 ${showcategorymenu ? 'block' : 'hidden'}`}>
                 <Sidebar/>
             </div>

@@ -31,7 +31,7 @@ function Sidebar() {
         'https://neptun.az/image/catalog/icon-menu/neptun-icon.svg',
         'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg',]
 
-    console.log(data)
+    // console.log(data)
     return (
         <div className='relative bg-white w-[270px]'>
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
