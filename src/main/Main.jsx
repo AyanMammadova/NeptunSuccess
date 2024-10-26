@@ -75,7 +75,7 @@ function Main() {
           <div>Endirimli məhsullar</div>
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
-        <div className='flex gap-[30px] bp840:justify-between justify-around  flex-wrap lg:flex-nowrap'>
+        <div className='flex gap-[30px] justify-evenly flex-wrap lg:flex-nowrap'>
           <div className='bg-white text-center rounded-2xl py-[25px] px-[10px] '>
             <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
             <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
@@ -197,7 +197,7 @@ function Main() {
           <div>Ən çox satılanlar</div>
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
-        <div className='flex gap-[30px] bp840:justify-between justify-around  flex-wrap lg:flex-nowrap'>
+        <div className='flex gap-[30px] justify-evenly flex-wrap lg:flex-nowrap'>
           <div className='bg-white text-center rounded-2xl py-[25px] px-[10px]'>
             <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
             <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
@@ -267,12 +267,11 @@ function Main() {
         </div>
       </div>
 
-        <div className='w-[87%] flex flex-row justify-around gap-[50px] flex-wrap mx-auto py-[50px] *:w-[250px]'>
-          
-            <img src="https://neptun.az/image/catalog/bannerler/freshmaker.png" alt="" />
-            <img src="https://neptun.az/image/catalog/bannerler/payman.png" alt="" />
-            <img src="https://neptun.az/image/catalog/bannerler/joyful.png" alt="" />
-            <img  src="https://neptun.az/image/catalog/bannerler/pfanner.png" alt="" />
+        <div className='w-[87%] flex flex-row justify-evenly gap-[50px] flex-wrap mx-auto py-[50px]'>
+            <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/freshmaker.png" alt="" />
+            <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/payman.png" alt="" />
+            <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/joyful.png" alt="" />
+            <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/pfanner.png" alt="" />
         </div>
 
     </main>
