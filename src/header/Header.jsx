@@ -181,15 +181,12 @@ function Header() {
             </div>
             
         </section>
-        <div >
-            <div className='absolute top-[210px]'>
-                <div id='slidingcategory'  className={`fixed top-[210px] z-50 h-full w-[40%] transition-transform duration-500 
-                    ${showcategorymenu ? 'translate-x-0' : '-translate-x-full'}`}>
-                    <Sidebar/>
-                </div>
-            </div>
+        
+        <div id='slidingcategory'  className={`fixed  z-50 h-full w-[40%]
+            ${showcategorymenu ? 'block' : 'hidden'}`}>
+            <Sidebar/>
         </div>
-
+           
       
     </header>
   )
