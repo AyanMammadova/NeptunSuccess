@@ -3,17 +3,20 @@ import { BsArrowRight } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
+import "swiper/css/effect-fade"; 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation ,EffectFade, FreeMode } from 'swiper/modules';
 function Main() {
   return (
     <main className='bg-[#F2F2F2]'>
       <div className='lg:ml-[350px] 2xl:ml-[400px]'>
         <div className='pt-[20px] w-[90%] mx-[auto]'>
           <Swiper
+            effect="fade"
+            speed={1000}
             spaceBetween={30}
             centeredSlides={true}
             autoplay={{
@@ -24,7 +27,7 @@ function Main() {
               clickable: true,
             }}
             navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
+            modules={[Autoplay, Pagination, Navigation,EffectFade]}
             className="mySwiper"
           >
             <SwiperSlide><img className='w-[100%] object-contain' src="https://neptun.az/image/cache/webp/catalog/09.18.2024/banner-17-29-oktyabr-kataloq-1130x413.webp?v=9" alt="" /></SwiperSlide>
@@ -83,18 +86,95 @@ function Main() {
         </div >
       </div>
       <p className='text-right w-[95%] text-[#FF8300] cursor-pointer'>Hamısına bax</p>
-      <div className='w-[90%] m-[auto]  gap-[20px] justify-end 2xl:justify-between  pb-[20px] flex '>
-        <div className='relative'>
-          <p className='absolute  bg-[#312f2fb3] test:text-[.9em] sm:text-[1.5em] p-[10px] sm:p-[20px] text-white rounded-br-2xl '>Kategoriya: <br />Səhər yeməyi</p>
-          <img className='h-[100%]  object-contain rounded-2xl' src="https://neptun.az/image/catalog/bannerler/xususi-teklif/meyve-terevez.jpg" alt="" />
+      <div className='w-[90%] m-[auto] mt-[30px]  gap-[20px] lg:flex 2xl:justify-between items-center  pb-[20px] '>
+        <div className='hidden md:block lg:w-[30%] w-[100%] rounded-lg'>
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={10}
+            pagination={{
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            navigation={true}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              },
+              1024:{
+                slidesPerView: 1,
+                spaceBetween: 40,
+              }
+            }}
+            modules={[Pagination, Autoplay, Navigation]}
+            className="mySwiper2"
+          >
+            {
+              Array(10).fill('hello').map(item=>
+                <SwiperSlide className='relative'>
+                  <div className='relative h-[100%] rounded-lg'>
+                    <p className='absolute  bg-[#312f2fb3] test:text-[.9em] sm:text-[1.5em] p-[10px] sm:p-[20px] text-white rounded-br-2xl '>Kategoriya: <br />Səhər yeməyi</p>
+                    <img className='h-[100%]  object-contain rounded-2xl' src="https://neptun.az/image/catalog/bannerler/xususi-teklif/meyve-terevez.jpg" alt="" />
+                  </div>
+                </SwiperSlide>)  
+            }  
+          </Swiper>
         </div>
-        <div className='relative'>
-          <p className='absolute bg-[#312f2fb3] test:text-[.9em] sm:text-[1.5em] p-[10px] sm:p-[20px] text-white rounded-br-2xl '>Kategoriya: <br />Səhər yeməyi</p>
-          <img className='h-[100%] object-contain rounded-2xl' src="https://neptun.az/image/catalog/bannerler/xususi-teklif/siyniyyat.jpg" alt="" />
-        </div>
-        <div className='relative lg:block  hidden'>
-          <p className='absolute bg-[#312f2fb3] test:text-[.9em] sm:text-[1.5em] p-[10px] sm:p-[20px] text-white rounded-br-2xl '>Kategoriya: <br />Səhər yeməyi</p>
-          <img className='h-[100%] object-contain rounded-2xl ' src="https://neptun.az/image/catalog/YEN%C4%B0/MEHSUL/11.05.2020/cerez.jpg" alt="" />
+        <div className= 'my-[30px]  lg:w-[70%] w-[100%] '>
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={10}
+            pagination={{
+              clickable: true,
+            }}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            navigation={true}
+            // centeredSlides={true}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              }
+            }}
+            modules={[Pagination, Autoplay, Navigation]}
+            className="mySwiper2"
+          >
+            {
+              Array(25).fill('hello').map(item=>
+                <SwiperSlide className='relative'>
+                  <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
+                    <CiHeart />
+                  </div>
+                  <a href="#">
+                    <div className='bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]'>
+                      <img className='rounded-3xl max-w-[250px] m-auto inline-block w-[100px]' src="https://neptun.az/image/cache/logo-180x180.png?v=9" alt="" />
+                      <p className='text-[.7em] font-[600]'>DOVE 100GR SABUN COCONUT MILK</p>
+                      <p className='xl:text-[22px] '>2.35₼</p>
+                      <div className='flex justify-center items-center '>
+                        <FaMinus className='text-[#FF8300] cursor-pointer' />
+                        <span className='p-[10px] text-[12px]'>1 ədəd</span>
+                        <FaPlus className='text-[#FF8300] cursor-pointer' />
+                      </div>
+                      <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                    </div>
+                  </a>
+                </SwiperSlide>)  
+            }  
+          </Swiper>
         </div>
       </div>
       <div className='w-[87%] mx-auto py-[50px]'>
@@ -103,13 +183,13 @@ function Main() {
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
         <Swiper
-          slidesPerView={1}
+          slidesPerView={2}
           spaceBetween={10}
           pagination={{
             clickable: true,
           }}
           autoplay={{
-            delay: 2500,
+            delay: 2400,
             disableOnInteraction: false,
           }}
           navigation={true}
@@ -131,214 +211,36 @@ function Main() {
           modules={[Pagination, Autoplay, Navigation]}
           className="mySwiper2"
         >
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+          {
+            Array(25).fill('hello').map(item=>
+              <SwiperSlide className='relative'>
+              <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
+                <CiHeart />
               </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
+              <a href='#'>
+                <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
+                  <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
+                  <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
+                  <div className='flex items-center justify-center gap-5'>
+                    <div>
+                      <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
+                    </div>
+                    <div>
+                      <del className='text-[16px] text-gray-400'>2.00₼</del>
+                      <p className='xl:text-[22px]'>1.65₼</p>
+                    </div>
                   </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
+                  <div className='flex justify-center items-center '>
+                    <FaMinus className='text-[#FF8300] cursor-pointer' />
+                    <span className='p-[10px] text-[12px]'>1 ədəd</span>
+                    <FaPlus className='text-[#FF8300] cursor-pointer' />
                   </div>
+                  <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
                 </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href='#'>
-              <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                <div className='flex items-center justify-center gap-5'>
-                  <div>
-                    <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                  </div>
-                  <div>
-                    <del className='text-[16px] text-gray-400'>2.00 ₼</del>
-                    <p className='text-[22px]'>1.65 ₼</p>
-                  </div>
-                </div>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
+              </a>
+            </SwiperSlide>)
+          }
+         
         </Swiper>
       </div>
       <div className='w-[87%] mx-auto py-[50px] mt-[50px]'>
@@ -347,7 +249,7 @@ function Main() {
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
         <Swiper
-          slidesPerView={1}
+          slidesPerView={2}
           spaceBetween={10}
           pagination={{
             clickable: true,
@@ -375,150 +277,30 @@ function Main() {
           modules={[Pagination, Autoplay, Navigation]}
           className="mySwiper2"
         >
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
+           {
+            Array(25).fill('hello').map(item=>
+              <SwiperSlide className='relative'>
+                <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
+                  <CiHeart />
                 </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
-          <SwiperSlide className='relative'>
-            <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-              <CiHeart />
-            </div>
-            <a href="#">
-              <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                <p className='text-[22px]'>2.35₼</p>
-                <div className='flex justify-center items-center '>
-                  <FaMinus className='text-[#FF8300] cursor-pointer' />
-                  <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                  <FaPlus className='text-[#FF8300] cursor-pointer' />
-                </div>
-                <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
-              </div>
-            </a>
-          </SwiperSlide>
+                <a href="#">
+                  <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
+                    <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
+                    <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
+                    <p className='xl:text-[22px]'>2.35₼</p>
+                    <div className='flex justify-center items-center '>
+                      <FaMinus className='text-[#FF8300] cursor-pointer' />
+                      <span className='p-[10px] text-[12px]'>1 ədəd</span>
+                      <FaPlus className='text-[#FF8300] cursor-pointer' />
+                    </div>
+                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                  </div>
+                </a>
+              </SwiperSlide>)
+             
+          }
+          
+          
         </Swiper>
       </div>
 
