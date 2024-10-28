@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsArrowRight } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
-import "swiper/css/effect-fade"; 
+import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation ,EffectFade, FreeMode } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation, EffectFade, FreeMode } from 'swiper/modules';
 function Main() {
+
+  const [productData, setProductData] = useState([])
+
+  useEffect(() => {
+    fetch("https://neptunbk.vercel.app/products?limit=100")
+      .then(res => res.json())
+      .then(product => {
+        setProductData(product)
+      })
+  }, [])
+
+  // console.log(productData);
+
   return (
     <main className='bg-[#F2F2F2]'>
       <div className='lg:ml-[350px] 2xl:ml-[400px]'>
@@ -27,7 +40,7 @@ function Main() {
               clickable: true,
             }}
             navigation={true}
-            modules={[Autoplay, Pagination, Navigation,EffectFade]}
+            modules={[Autoplay, Pagination, Navigation, EffectFade]}
             className="mySwiper"
           >
             <SwiperSlide><img className='w-[100%] object-contain' src="https://neptun.az/image/cache/webp/catalog/09.18.2024/banner-17-29-oktyabr-kataloq-1130x413.webp?v=9" alt="" /></SwiperSlide>
@@ -108,7 +121,7 @@ function Main() {
                 slidesPerView: 3,
                 spaceBetween: 40,
               },
-              1024:{
+              1024: {
                 slidesPerView: 1,
                 spaceBetween: 40,
               }
@@ -117,17 +130,17 @@ function Main() {
             className="mySwiper2"
           >
             {
-              Array(10).fill('hello').map(item=>
+              Array(10).fill('hello').map(item =>
                 <SwiperSlide className='relative'>
                   <div className='relative h-[100%] rounded-lg'>
                     <p className='absolute  bg-[#312f2fb3] test:text-[.9em] sm:text-[1.5em] p-[10px] sm:p-[20px] text-white rounded-br-2xl '>Kategoriya: <br />Səhər yeməyi</p>
                     <img className='h-[100%]  object-contain rounded-2xl' src="https://neptun.az/image/catalog/bannerler/xususi-teklif/meyve-terevez.jpg" alt="" />
                   </div>
-                </SwiperSlide>)  
-            }  
+                </SwiperSlide>)
+            }
           </Swiper>
         </div>
-        <div className= 'my-[30px]  lg:w-[70%] w-[100%] '>
+        <div className='my-[30px] lg:w-[70%] w-[100%]'>
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
@@ -139,7 +152,6 @@ function Main() {
               disableOnInteraction: false,
             }}
             navigation={true}
-            // centeredSlides={true}
             breakpoints={{
               640: {
                 slidesPerView: 2,
@@ -148,32 +160,39 @@ function Main() {
               768: {
                 slidesPerView: 3,
                 spaceBetween: 40,
-              }
+              },
             }}
             modules={[Pagination, Autoplay, Navigation]}
             className="mySwiper2"
           >
             {
-              Array(25).fill('hello').map(item=>
-                <SwiperSlide className='relative'>
-                  <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
+              productData.products?.map((item, i) => (
+                <SwiperSlide className="relative" key={i}>
+                  <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                     <CiHeart />
                   </div>
                   <a href="#">
-                    <div className='bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]'>
-                      <img className='rounded-3xl max-w-[250px] m-auto inline-block w-[100px]' src="https://neptun.az/image/cache/logo-180x180.png?v=9" alt="" />
-                      <p className='text-[.7em] font-[600]'>DOVE 100GR SABUN COCONUT MILK</p>
-                      <p className='xl:text-[22px] '>2.35₼</p>
-                      <div className='flex justify-center items-center '>
-                        <FaMinus className='text-[#FF8300] cursor-pointer' />
-                        <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                        <FaPlus className='text-[#FF8300] cursor-pointer' />
+                    <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
+                      <img
+                        className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
+                        src={item.img}
+                        alt={item.name}
+                      />
+                      <p className="text-[10px] font-[600]">{item.name}</p>
+                      <p className="xl:text-[18px]">{item.price}₼</p>
+                      <div className="flex justify-center items-center">
+                        <FaMinus className="text-[#FF8300] cursor-pointer" />
+                        <span className="p-[10px] text-[12px]">1 ədəd</span>
+                        <FaPlus className="text-[#FF8300] cursor-pointer" />
                       </div>
-                      <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                      <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                        Səbətə at
+                      </button>
                     </div>
                   </a>
-                </SwiperSlide>)  
-            }  
+                </SwiperSlide>
+              ))
+            }
           </Swiper>
         </div>
       </div>
@@ -212,35 +231,35 @@ function Main() {
           className="mySwiper2"
         >
           {
-            Array(25).fill('hello').map(item=>
+            Array(25).fill('hello').map(item =>
               <SwiperSlide className='relative'>
-              <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-                <CiHeart />
-              </div>
-              <a href='#'>
-                <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                  <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                  <p className='text-[.7em] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                  <div className='flex items-center justify-center gap-5'>
-                    <div>
-                      <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
-                    </div>
-                    <div>
-                      <del className='text-[16px] text-gray-400'>2.00₼</del>
-                      <p className='xl:text-[22px]'>1.65₼</p>
-                    </div>
-                  </div>
-                  <div className='flex justify-center items-center '>
-                    <FaMinus className='text-[#FF8300] cursor-pointer' />
-                    <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                    <FaPlus className='text-[#FF8300] cursor-pointer' />
-                  </div>
-                  <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
+                  <CiHeart />
                 </div>
-              </a>
-            </SwiperSlide>)
+                <a href='#'>
+                  <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
+                    <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
+                    <p className='text-[10px] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
+                    <div className='flex items-center justify-center gap-5'>
+                      <div>
+                        <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
+                      </div>
+                      <div>
+                        <del className='text-[14px] text-gray-400'>2.00₼</del>
+                        <p className='xl:text-[18px]'>1.65₼</p>
+                      </div>
+                    </div>
+                    <div className='flex justify-center items-center '>
+                      <FaMinus className='text-[#FF8300] cursor-pointer' />
+                      <span className='p-[10px] text-[12px]'>1 ədəd</span>
+                      <FaPlus className='text-[#FF8300] cursor-pointer' />
+                    </div>
+                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                  </div>
+                </a>
+              </SwiperSlide>)
           }
-         
+
         </Swiper>
       </div>
       <div className='w-[87%] mx-auto py-[50px] mt-[50px]'>
@@ -277,30 +296,37 @@ function Main() {
           modules={[Pagination, Autoplay, Navigation]}
           className="mySwiper2"
         >
-           {
-            Array(25).fill('hello').map(item=>
-              <SwiperSlide className='relative'>
-                <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
+          {
+            productData.products?.map((item, i) => (
+              <SwiperSlide className="relative" key={i}>
+                <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                   <CiHeart />
                 </div>
                 <a href="#">
-                  <div className='bg-white text-center rounded-2xl py-[25px] px-[20px]'>
-                    <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/NEPISCHEVIEPRODUKTI/LICHNAYAGIGIENA/MILO/ProstiyeMila/021111-460x460.webp?v=9" alt="" />
-                    <p className='text-[.7em] font-[700]'>DOVE 100GR SABUN COCONUT MILK</p>
-                    <p className='xl:text-[22px]'>2.35₼</p>
-                    <div className='flex justify-center items-center '>
-                      <FaMinus className='text-[#FF8300] cursor-pointer' />
-                      <span className='p-[10px] text-[12px]'>1 ədəd</span>
-                      <FaPlus className='text-[#FF8300] cursor-pointer' />
+                  <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
+                    <img
+                      className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
+                      src={item.img}
+                      alt={item.name}
+                    />
+                    <p className="text-[10px] font-[600]">{item.name}</p>
+                    <p className="xl:text-[18px]">{item.price}₼</p>
+                    <div className="flex justify-center items-center">
+                      <FaMinus className="text-[#FF8300] cursor-pointer" />
+                      <span className="p-[10px] text-[12px]">1 ədəd</span>
+                      <FaPlus className="text-[#FF8300] cursor-pointer" />
                     </div>
-                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                    <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                      Səbətə at
+                    </button>
                   </div>
                 </a>
-              </SwiperSlide>)
-             
+              </SwiperSlide>
+            ))
+
           }
-          
-          
+
+
         </Swiper>
       </div>
 
