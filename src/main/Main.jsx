@@ -19,18 +19,11 @@ function Main() {
     axios("https://neptunbk.vercel.app/products?limit=200")
     .then(res=>setProductData(res.data.products))
   }, [])
-  useEffect(()=>{
-  if(productData){
-    let d=productData.filter(item=>item.discount>1).sort((a, b) => b.discount - a.discount)
-    setDiscountData(d)
-    // console.log(d)
-  }
-  else{
-    console.log('wait for the discount data pleasee!')
-  }
-
-  },[productData])
-  // console.log(productData);
+  useEffect(() => {
+    axios("https://neptunbk.vercel.app/products/discounted")
+    .then(res=>setDiscountData(res.data.products))
+  }, [])
+  
 
   return (
     <main className='bg-[#F2F2F2]'>
