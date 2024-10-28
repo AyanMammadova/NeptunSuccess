@@ -60,7 +60,7 @@ function Footer() {
                   <p className='text-white font-bold text-[11px] '>Bizə abunə olun</p>
                 </div>
                 <div className='relative w-full max-w-[356px]'>
-                  <input className='w-full h-[42px] px-5 text-[12px] border rounded-[20px]' type="email" placeholder="e-poçt ünvanınız..." value="" size="55" />
+                  <input className='w-full h-[42px] px-5 text-[12px] border rounded-[20px]' type="email" placeholder="e-poçt ünvanınız..."  size="55" />
                   <button className="absolute h-[40px] right-[1px] top-1/2 transform -translate-y-1/2 bg-[#FF8300] hover:bg-[#E17400] transition-all duration-300 text-white text-[14px] px-5 rounded-[20px]">Abunə ol</button>
                 </div>
               </div>
@@ -82,7 +82,7 @@ function Footer() {
                     </select>
                   </div>
                   <div className='relative w-full'>
-                    <input className='w-full h-[42px] px-5 text-[12px] border rounded-[20px]' type="text" placeholder="XXX YY ZZ" value="" size="55" />
+                    <input className='w-full h-[42px] px-5 text-[12px] border rounded-[20px]' type="text" placeholder="XXX YY ZZ"  size="55" />
                     <button className="absolute h-[40px] right-[1px] top-1/2 transform -translate-y-1/2 bg-[#FF8300] hover:bg-[#E17400] transition-all duration-300 text-white text-[14px] px-5 rounded-[20px]">Abunə ol</button>
                   </div>
                 </div>

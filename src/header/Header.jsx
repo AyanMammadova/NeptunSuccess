@@ -183,7 +183,7 @@ function Header() {
                         <img src="./img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
                         <div className='relative w-[150px] bp600:w-[300px] bp600:mr-[30px] xl:w-[500px] border-[1px] rounded-3xl border-[#FF8300] h-[35px] bp600:h-[44px] flex items-center  justify-between' >
                             <FaSearch  className='text-[orange] absolute left-[5px] hidden bp600:block'/>
-                            <input type="text" className='absolute w-[50px] left-[10px] bp600:left-[30px] ' placeholder='axtar..'/>
+                            <input  type="text" className='absolute w-[50px] left-[10px] bp600:left-[30px] ' placeholder='axtar..'/>
                             <button className='bg-[#FF8300] text-white py-[11px] px-[10px] absolute right-0 top-0 rounded-3xl hidden bp600:block'>Axtar</button>
                             <button className='bg-[#FF8300] text-white py-[9px] px-[10px] absolute right-0 top-0 rounded-3xl bp600:hidden'><FaSearch/></button>
                         </div>

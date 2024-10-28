@@ -5,22 +5,31 @@ import { FaMinus } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { IoCart } from "react-icons/io5";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation, EffectFade, FreeMode } from 'swiper/modules';
+import axios from 'axios';
 function Main() {
-
   const [productData, setProductData] = useState([])
+  const [discountData, setDiscountData] = useState([])
 
   useEffect(() => {
-    fetch("https://neptunbk.vercel.app/products?limit=100")
-      .then(res => res.json())
-      .then(product => {
-        setProductData(product)
-      })
+    axios("https://neptunbk.vercel.app/products?limit=200")
+    .then(res=>setProductData(res.data.products))
   }, [])
+  useEffect(()=>{
+  if(productData){
+    let d=productData.filter(item=>item.discount>1).sort((a, b) => b.discount - a.discount)
+    setDiscountData(d)
+    // console.log(d)
+  }
+  else{
+    console.log('wait for the discount data pleasee!')
+  }
 
+  },[productData])
   // console.log(productData);
 
   return (
@@ -101,7 +110,7 @@ function Main() {
       <p className='text-right w-[95%] text-[#FF8300] cursor-pointer'>Hamısına bax</p>
       <div className='w-[90%] m-[auto] mt-[30px]  gap-[20px] lg:flex 2xl:justify-between items-center  pb-[20px] '>
         <div className='hidden md:block lg:w-[30%] w-[100%] rounded-lg'>
-          <Swiper
+          <Swiper id='reklamswiper'
             slidesPerView={1}
             spaceBetween={10}
             pagination={{
@@ -130,8 +139,8 @@ function Main() {
             className="mySwiper2"
           >
             {
-              Array(10).fill('hello').map(item =>
-                <SwiperSlide className='relative'>
+              Array(10).fill('hello').map((item,i) =>
+                <SwiperSlide key={i} className='relative'>
                   <div className='relative h-[100%] rounded-lg'>
                     <p className='absolute  bg-[#312f2fb3] test:text-[.9em] sm:text-[1.5em] p-[10px] sm:p-[20px] text-white rounded-br-2xl '>Kategoriya: <br />Səhər yeməyi</p>
                     <img className='h-[100%]  object-contain rounded-2xl' src="https://neptun.az/image/catalog/bannerler/xususi-teklif/meyve-terevez.jpg" alt="" />
@@ -141,7 +150,7 @@ function Main() {
           </Swiper>
         </div>
         <div className='my-[30px] lg:w-[70%] w-[100%]'>
-          <Swiper
+          <Swiper 
             slidesPerView={1}
             spaceBetween={10}
             pagination={{
@@ -166,7 +175,7 @@ function Main() {
             className="mySwiper2"
           >
             {
-              productData.products?.map((item, i) => (
+              productData?.map((item, i) => (
                 <SwiperSlide className="relative" key={i}>
                   <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                     <CiHeart />
@@ -196,12 +205,12 @@ function Main() {
           </Swiper>
         </div>
       </div>
-      <div className='w-[87%] mx-auto py-[50px]'>
+      <div className='w-[87%] mx-auto py-[50px] '>
         <div className='flex justify-between items-center mb-[20px]'>
           <div>Endirimli məhsullar</div>
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
-        <Swiper
+        <Swiper id='discountswiper'
           slidesPerView={2}
           spaceBetween={10}
           pagination={{
@@ -231,32 +240,52 @@ function Main() {
           className="mySwiper2"
         >
           {
-            Array(25).fill('hello').map(item =>
-              <SwiperSlide className='relative'>
+            discountData.map((item,i) =>
+              <SwiperSlide key={i} className=' relative'>
                 <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
                   <CiHeart />
                 </div>
                 <a href='#'>
-                  <div className='productSlide bg-white text-center rounded-2xl py-[25px] px-[20px] '>
-                    <img className='rounded-3xl inline-block w-[100px]' src="https://neptun.az/image/cache/webp/catalog/OZMO20GREQQGERCEKSOKOLAD-1000x1000.webp?v=9" alt="" />
-                    <p className='text-[10px] font-[700]'>OZMO 20GR EQQ GERCEK SOKOLAD</p>
-                    <div className='flex items-center justify-center gap-5'>
+                  <div className='productSlide bg-white text-center h-[100%] flex flex-col rounded-2xl py-[25px] px-[20px] '>
+                    <img className='rounded-3xl inline-block object-contain w-[100px]' src={item.img} alt="" />
+                    <p className='text-[10px] font-[700] overflow-hidden text-ellipsis whitespace-nowrap w-[90%] '>{item.name}</p>
+                    <div className='flex items-center justify-center gap-5 '>
                       <div>
-                        <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>-18%</button>
+                        <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>{item.discount}%</button>
                       </div>
                       <div>
-                        <del className='text-[14px] text-gray-400'>2.00₼</del>
-                        <p className='xl:text-[18px]'>1.65₼</p>
+                        <del className='text-[14px] text-gray-400'>{item.price.toFixed(2)}₼</del>
+                        <p className='xl:text-[18px]'>{item.totalPrice.toFixed(2)}₼</p>
                       </div>
                     </div>
                     <div className='flex justify-center items-center '>
                       <FaMinus className='text-[#FF8300] cursor-pointer' />
-                      <span className='p-[10px] text-[12px]'>1 ədəd</span>
+                      <span className='p-[10px] text-[12px]'>1ədəd</span>
                       <FaPlus className='text-[#FF8300] cursor-pointer' />
                     </div>
-                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]'>Səbətə at</button>
+                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] hidden lg:block'>Səbətə at</button>
+                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] m-[auto] lg:hidden'><IoCart /></button>
                   </div>
                 </a>
+                {/* <a href="#">
+                  <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
+                    <img
+                      className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
+                      src={item.img}
+                      alt={item.name}
+                    />
+                    <p className="text-[10px] font-[600]">{item.name}</p>
+                    <p className="xl:text-[18px]">{item.price}₼</p>
+                    <div className="flex justify-center items-center">
+                      <FaMinus className="text-[#FF8300] cursor-pointer" />
+                      <span className="p-[10px] text-[12px]">1 ədəd</span>
+                      <FaPlus className="text-[#FF8300] cursor-pointer" />
+                    </div>
+                    <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                      Səbətə at
+                    </button>
+                  </div>
+                </a> */}
               </SwiperSlide>)
           }
 
@@ -267,7 +296,7 @@ function Main() {
           <div>Ən çox satılanlar</div>
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
-        <Swiper
+        <Swiper id='topselling'
           slidesPerView={2}
           spaceBetween={10}
           pagination={{
@@ -297,7 +326,7 @@ function Main() {
           className="mySwiper2"
         >
           {
-            productData.products?.map((item, i) => (
+            productData?.map((item, i) => (
               <SwiperSlide className="relative" key={i}>
                 <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                   <CiHeart />
@@ -313,7 +342,7 @@ function Main() {
                     <p className="xl:text-[18px]">{item.price}₼</p>
                     <div className="flex justify-center items-center">
                       <FaMinus className="text-[#FF8300] cursor-pointer" />
-                      <span className="p-[10px] text-[12px]">1 ədəd</span>
+                      <span className="p-[10px] text-[12px]">1ədəd</span>
                       <FaPlus className="text-[#FF8300] cursor-pointer" />
                     </div>
                     <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
