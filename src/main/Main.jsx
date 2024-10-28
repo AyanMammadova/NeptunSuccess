@@ -16,7 +16,7 @@ function Main() {
   const [discountData, setDiscountData] = useState([])
 
   useEffect(() => {
-    axios("https://neptunbk.vercel.app/products?limit=200")
+    axios("https://neptunbk.vercel.app/products?limit=20")
     .then(res=>setProductData(res.data.products))
   }, [])
   useEffect(() => {
