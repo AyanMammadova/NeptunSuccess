@@ -11,6 +11,7 @@ export default {
         sm: '640px',  // Small devices
         md: '768px',  // Medium devices
         'bp840':'840px',
+        'bp900':'900px',
         lg: '1024px', // Large devices
         'bp1200':'1200px',
         xl: '1280px', // Extra large devices

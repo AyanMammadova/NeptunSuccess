@@ -16,7 +16,7 @@ function Main() {
   const [discountData, setDiscountData] = useState([])
 
   useEffect(() => {
-    axios("https://neptunbk.vercel.app/products?limit=20")
+    axios("https://neptunbk.vercel.app/products?limit=20&page=4")
     .then(res=>setProductData(res.data.products))
   }, [])
   useEffect(() => {
@@ -181,7 +181,7 @@ function Main() {
                         alt={item.name}
                       />
                       <p className="text-[10px] font-[600]">{item.name}</p>
-                      <p className="xl:text-[18px]">{item.price}₼</p>
+                      <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
                       <div className="flex justify-center items-center">
                         <FaMinus className="text-[#FF8300] cursor-pointer" />
                         <span className="p-[10px] text-[12px]">1 ədəd</span>
@@ -331,14 +331,14 @@ function Main() {
                       src={item.img}
                       alt={item.name}
                     />
-                    <p className="text-[10px] font-[600]">{item.name}</p>
-                    <p className="xl:text-[18px]">{item.price}₼</p>
+                    <p className="text-[10px] font-[600]  overflow-hidden text-ellipsis whitespace-nowrap w-[90%] ">{item.name}</p>
+                    <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
                     <div className="flex justify-center items-center">
                       <FaMinus className="text-[#FF8300] cursor-pointer" />
                       <span className="p-[10px] text-[12px]">1ədəd</span>
                       <FaPlus className="text-[#FF8300] cursor-pointer" />
                     </div>
-                    <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                    <button className="text-white py-[3px] px-[15px] text-[.7em] rounded-2xl bg-[#FF8300]">
                       Səbətə at
                     </button>
                   </div>
@@ -354,10 +354,10 @@ function Main() {
 
 
       <div className='w-[87%] flex flex-row justify-evenly gap-[50px] flex-wrap mx-auto py-[50px]'>
-        <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/freshmaker.png" alt="" />
-        <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/payman.png" alt="" />
-        <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/joyful.png" alt="" />
-        <img className='w-[289px]' src="https://neptun.az/image/catalog/bannerler/pfanner.png" alt="" />
+        <img className='bp600:w-[40%] bp900:w-[20%]' src="https://neptun.az/image/catalog/bannerler/freshmaker.png" alt="" />
+        <img className='bp600:w-[40%] bp900:w-[20%]' src="https://neptun.az/image/catalog/bannerler/payman.png" alt="" />
+        <img className='bp600:w-[40%] bp900:w-[20%]' src="https://neptun.az/image/catalog/bannerler/joyful.png" alt="" />
+        <img className='bp600:w-[40%] bp900:w-[20%]' src="https://neptun.az/image/catalog/bannerler/pfanner.png" alt="" />
       </div>
 
     </main >
