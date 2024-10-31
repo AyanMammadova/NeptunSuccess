@@ -179,7 +179,7 @@ function Header() {
             <section id='headersection1' className='bg-white flex  items-center py-[20px] '>
                 <div className='bp600:w-[87%] w-[95%] m-[auto] flex justify-between'>
                     <div className='flex items-center justify-between sm:justify-start  w-[100%]'>
-                        <img src="../public/img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
+                        <img src="../img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
                         <div className='relative w-[150px] bp600:w-[300px] bp600:mr-[30px] xl:w-[500px] border-[1px] rounded-3xl border-[#FF8300] h-[35px] bp600:h-[44px] flex items-center  justify-between' >
                             <FaSearch  className='text-[orange] absolute left-[5px] hidden bp600:block'/>
                             <input  type="text" className='absolute w-[50px] left-[10px] bp600:left-[30px] ' placeholder='axtar..'/>
