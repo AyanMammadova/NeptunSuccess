@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IoIosArrowForward } from "react-icons/io";
 import { HiMiniBars4 } from "react-icons/hi2";
+import { DATA } from '../../context/DataContext';
+import { Link } from 'react-router-dom';
 function Sidebar() {
-    const [data,setData]=useState([])
-
-
-    useEffect( ()=>{
-        fetch('https://neptunbk.vercel.app/categories')
-        .then(res=>res.json())
-        .then(datamiz=>{
-            setData(datamiz)
-        })
-        .catch(error => console.error('Error fetching data:', error));
-    },[])
+    const [showCategory,setShowCategory]=useState(true)
+    const {categoryData}=useContext(DATA)
     const iconData=[
         'https://neptun.az/image/catalog/icon-menu/Meyv%C9%99-v%C9%99-t%C9%99r%C9%99v%C9%99z.svg',
         'https://neptun.az/image/catalog/icon-menu/%C9%99t-v%C9%99-toyuq%20m%C9%99hsullar%C4%B1.svg',
@@ -29,40 +22,48 @@ function Sidebar() {
         'https://neptun.az/image/catalog/icon-menu/Heyvan-yeml%C9%99ri.svg',
         'https://neptun.az/image/catalog/icon-menu/neptun-icon.svg  ',
         'https://neptun.az/image/catalog/icon-menu/neptun-icon.svg',
-        'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg',]
+        'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg'
+    ]
 
-    // console.log(data)
     return (
         <div className='relative bg-white w-[270px]'>
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
-            <p className='lg:flex hidden font-[600]  p-[10px] gap-[15px] text-[#FF8300]'><HiMiniBars4  className='text-[1.5em] '/> Kategoriyalar</p>
-            <ul className='text-black'>
+            <p  className='lg:flex hidden font-[600] h-[50px]   p-[10px] gap-[15px] text-[#FF8300]'>
+                <HiMiniBars4   className='text-[1.5em] '/> Kategoriyalar
+            </p>    
+            
+            <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} } `} >
                 {
-                    data.map((item,i)=>{
-                        return <li key={i} className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
+                    categoryData && categoryData.map((item,i)=>{
+                        return <Link key={i} to={`details/${item.categoryName}`}
+                                className={` ${item.subcategory.length>0 ? 'cursor-text' : 'cursor-auto'}`}
+                                onClick={(event) => item.subcategory.length > 0 && event.preventDefault()}
+                        >
+                         <li  className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
                             <div className='flex items-center'>
                                 <img key={i} src={iconData[i]} className='text-[#FF8300] text-[1.8em] pr-[10px]' />
                                 <span>{item.categoryName}</span>
                             </div>
-                            <IoIosArrowForward />
-                            {item.subcategory ? 
+                            <IoIosArrowForward  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}/>
+                            { item.subcategory.length>0 && 
                              <div className='absolute left-[150px] sm:left-full top-0 z-50 hidden group-hover:flex flex-col bg-white p-2 shadow-lg space-x-2 w-[250px] border-x-2 border-l-[#FF8300] border-r-[gray] transition-all ease-in-out duration-600'>
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
-                                            <div key={subi} className='flex'>
-                                                    <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
-                                            </div>
+                                            <Link to={`details/${subitem.slug}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
+                                                <div  className='flex'>
+                                                        <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
+                                                </div>
+                                            </Link>
                                         ))
                                     }
-                            </div> : ''
+                            </div> 
                             }
                            
                         </li>
+                        </Link>
                     })
                 }
-            
-            
-            
+             
             <li className='relative flex justify-between text-white bg-[#FF8300] text-[.8em] font-[600] p-[10px] items-center'>
                 <div className='flex items-center'>
                     <img src='https://neptun.az/image/catalog/icon-menu/Aksiyalar.svg' className='text-[1.8em] pr-[10px]' />

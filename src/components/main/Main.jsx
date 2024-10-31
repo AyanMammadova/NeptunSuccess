@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BsArrowRight } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
@@ -10,20 +10,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation, EffectFade, FreeMode } from 'swiper/modules';
-import axios from 'axios';
-function Main() {
-  const [productData, setProductData] = useState([])
-  const [discountData, setDiscountData] = useState([])
 
-  useEffect(() => {
-    axios("https://neptunbk.vercel.app/products?limit=20&page=4")
-    .then(res=>setProductData(res.data.products))
-  }, [])
-  useEffect(() => {
-    axios("https://neptunbk.vercel.app/products/discounted")
-    .then(res=>setDiscountData(res.data.products))
-  }, [])
-  
+import { DATA } from '../../context/DataContext';
+
+function Main() {
+  const {productData}=useContext(DATA)
+  const {discountData}=useContext(DATA)
+  console.log(discountData)
 
   return (
     <main className='bg-[#F2F2F2]'>
@@ -168,7 +161,7 @@ function Main() {
             className="mySwiper2"
           >
             {
-              productData?.map((item, i) => (
+              productData && productData.map((item, i) => (
                 <SwiperSlide className="relative" key={i}>
                   <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                     <CiHeart />
@@ -233,7 +226,7 @@ function Main() {
           className="mySwiper2"
         >
           {
-            discountData.map((item,i) =>
+            discountData && discountData.map((item,i) =>
               <SwiperSlide key={i} className=' relative'>
                 <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
                   <CiHeart />
@@ -319,7 +312,7 @@ function Main() {
           className="mySwiper2"
         >
           {
-            productData?.map((item, i) => (
+            productData && productData.map((item, i) => (
               <SwiperSlide className="relative" key={i}>
                 <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                   <CiHeart />
