@@ -1,6 +1,5 @@
-import axios from 'axios'
 import React, { createContext, useEffect, useState } from 'react'
-// import { getCategories, getDiscounted, getProducts } from '../services/api'
+import { getCategories, getDiscounted, getProducts } from '../services/api'
 
 export const DATA=createContext(null)
 
@@ -11,26 +10,12 @@ function DataContext({children}) {
     
 
     useEffect(() => {
-        getProducts()
-        getCategories()
-        getDiscounted()
+        getProducts().then(res=>setProductData(res))
+        getCategories().then(res=>setCategoryData(res))
+        getDiscounted().then(res=>setDiscountData(res))
     }, [])
-    function getProducts(){
-      axios.get("https://neptunbk.vercel.app/products?limit=20")
-      .then(res=>setProductData(res.data.products))
-    }
-    function getCategories(){
-      axios.get("https://neptunbk.vercel.app/categories")
-      .then(res=>setCategoryData(res.data))
-    }
-    function getDiscounted(){
-      axios.get("https://neptunbk.vercel.app/products/discounted")
-      .then(res=>setDiscountData(res.data.products))
-    }
-    // async function getDiscounted(){
-    //     const res= await axios.get("https://neptunbk.vercel.app/products/discounted")
-    //     return res.data.products
-    // }
+    console.log(categoryData)
+   
     
   return (
     <DATA.Provider 

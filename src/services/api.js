@@ -1,20 +1,16 @@
-// import axios from "axios"
+import axios from "axios"
 
-// async function getProducts(){
-//     const res = await axios.get("https://neptunbk.vercel.app/products?limit=20")
-//     return res.data.products
-// }
-// async function getCategories(){
-//     const res= await axios.get('https://neptunbk.vercel.app/categories')
-//     return res.data
-// }
-// async function getDiscounted(){
-//     const res= await axios.get("https://neptunbk.vercel.app/products/discounted")
-//     return res.data.products
-// }
+async function getProducts(){
+    const res = await axios.get("https://neptunbk.vercel.app/products?limit=20")
+    return res.data.products
+}
+async function getCategories(){
+    const res= await axios.get('https://neptunbk.vercel.app/categories')
+    return res.data
+}
+async function getDiscounted(){
+    const res= await axios.get("https://neptunbk.vercel.app/products/discounted")
+    return res.data.products
+}
 
-// export {
-//     getProducts ,
-//     getCategories ,
-//     getDiscounted
-// }
+export {getProducts ,getCategories ,getDiscounted}
