@@ -8,7 +8,7 @@ import { DATA } from './context/DataContext'
 function App() {
   const {productData}=useContext(DATA)
   return (
-    <Routes>
+      <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
           <Route path='/details/:slug/*' element={<Details data={productData}/>} />
