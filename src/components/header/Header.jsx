@@ -121,8 +121,6 @@ function Header() {
           "submenu": []
         }
       ];
-      
-      
     const [showcategorymenu,setShowcategorymenu]=useState(false)
     const [showmenu,setShowmenu]=useState(false)
     const [menuData,setMenudata]=useState(menudatam.map(item=>({...item,showdrops:false})))
@@ -130,6 +128,7 @@ function Header() {
     function handlesidemenu(){
       handlecategorymenu()
         setShowmenu(!showmenu)
+        setShowcategorymenu(false)
         // console.log(showmenu)
     }
     function handlecategorymenu(){
@@ -147,7 +146,7 @@ function Header() {
     return (
         <header className=''>
             <section id='slidingmenu'>
-                <div className={` w-[50%] z-50  relative ${showmenu? 'block' : 'hidden'}  xl:hidden`}>
+                <div className={`w-[90%] z-50 relative ${showmenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} xl:hidden transition-all duration-500`}>
                     <ul className='flex flex-col  h-[100vh] border-r-2 shadow-2xl p-[40px] w-[80%] sm:w-[50%]  bg-white fixed z-50 text-[1em] font-[400] '>
                         <IoCloseCircleOutline onClick={()=>handlesidemenu()}  className='absolute right-[10px]  top-[10px] cursor-pointer text-[1.5em]'/>
                         {menuData.map((item,i)=>{
@@ -272,8 +271,9 @@ function Header() {
                 
             </section>
             <div id='slidingcategory'  className={`absolute  z-40 h-full w-[40%] lg:hidden
-                ${showcategorymenu ? 'block' : 'hidden'}`}>
+                ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} xl:hidden transition-all duration-500`}>
                 <Sidebar/>
+
             </div>
             
         
