@@ -165,3 +165,19 @@ body {
   color: #fff;
   background: #007aff;
 }
+
+.rangeInput::-webkit-slider-runnable-track {
+  background-color: #FF8300; /* Orange color for track */
+  height: 8px;
+  border-radius: 4px;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #FF8300; 
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px;
+}

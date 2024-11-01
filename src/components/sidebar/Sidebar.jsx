@@ -32,7 +32,8 @@ function Sidebar() {
                 <HiMiniBars4   className='text-[1.5em] '/> Kategoriyalar
             </p>    
             
-            <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} } `} >
+            <ul className='hidden' >
+            {/* <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} } `} > */}
                 {
                     categoryData && categoryData.map((item,i)=>{
                         return <Link key={i} to={`details/${item.categoryName}`}

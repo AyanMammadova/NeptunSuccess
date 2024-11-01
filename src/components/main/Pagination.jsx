@@ -5,9 +5,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa'
 function Pagination() {
   const {productData}=useContext(DATA)
   return (
-    <div className='flex mt-[40px] justify-between w-[90%] mx-[auto] min-h-[100vh] z-30'>
-      
-
+    <div className='flex mt-[40px] justify-between w-[80%] mx-[auto] min-h-[100vh] z-30'>
       <div>
         <div className='flex justify-around flex-wrap lg:ml-[350px] 2xl:ml-[400px] gap-[30px]'>
           {

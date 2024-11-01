@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path='/details/:slug/*' element={<Details data={productData}/>} />
+          <Route path='/:slug/*' element={<Details data={productData}/>} />
         </Route>
       </Routes>
   )
