@@ -25,20 +25,24 @@ function Sidebar() {
         'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg'
     ]
 
+    console.log(showCategory)
     return (
-        <div className='relative bg-white w-[270px]'>
+        <div className='relative bg-white rounded-lg  w-[270px]' onMouseLeave={() => setShowCategory(false)}>
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
-            <p  className='lg:flex hidden font-[600] h-[50px]   p-[10px] gap-[15px] text-[#FF8300]'>
+            <p  className={`lg:flex hidden font-[600] h-[50px]  p-[10px] gap-[15px] text-[#FF8300] `} 
+                onMouseEnter={() => setShowCategory(true)}>
                 <HiMiniBars4   className='text-[1.5em] '/> Kategoriyalar
-            </p>    
+            </p>  
+            <div className={`rounded-b-lg h-[10px] bg-[#FF8300] hidden lg:block   ${showCategory ? 'hidden' : 'block'}`}> </div>  
             
-            <ul className='hidden' >
-            {/* <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} } `} > */}
+            <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} `} >
                 {
                     categoryData && categoryData.map((item,i)=>{
-                        return <Link key={i} to={`details/${item.categoryName}`}
+                        return <a key={i}
                                 className={` ${item.subcategory.length>0 ? 'cursor-text' : 'cursor-auto'}`}
-                                onClick={(event) => item.subcategory.length > 0 && event.preventDefault()}
+                                onClick={(event) => 
+                                    {if (item.subcategory.length > 0) {event.preventDefault()};
+                                    setShowCategory(false) }}
                         >
                          <li  className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
                             <div className='flex items-center'>
@@ -50,7 +54,7 @@ function Sidebar() {
                              <div className='absolute left-[150px] sm:left-full top-0 z-50 hidden group-hover:flex flex-col bg-white p-2 shadow-lg space-x-2 w-[250px] border-x-2 border-l-[#FF8300] border-r-[gray] transition-all ease-in-out duration-600'>
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
-                                            <Link to={`details/${subitem.slug}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
+                                            <Link to={`${subitem.id}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
                                                 <div  className='flex'>
                                                         <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
                                                 </div>
@@ -61,7 +65,7 @@ function Sidebar() {
                             }
                            
                         </li>
-                        </Link>
+                        </a>
                     })
                 }
              

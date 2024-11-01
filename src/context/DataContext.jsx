@@ -7,14 +7,13 @@ function DataContext({children}) {
     const [categoryData,setCategoryData]=useState(null)
     const [productData, setProductData] = useState(null)
     const [discountData, setDiscountData] = useState(null)
-    
 
     useEffect(() => {
         getProducts().then(res=>setProductData(res))
         getCategories().then(res=>setCategoryData(res))
         getDiscounted().then(res=>setDiscountData(res))
+        
     }, [])
-    console.log(categoryData)
    
     
   return (
@@ -22,7 +21,8 @@ function DataContext({children}) {
     value={{
         categoryData,setCategoryData,
         discountData,setDiscountData,
-        productData,setProductData
+        productData,setProductData,
+        
 
     }}
     >

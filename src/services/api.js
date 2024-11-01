@@ -12,5 +12,10 @@ async function getDiscounted(){
     const res= await axios.get("https://neptunbk.vercel.app/products/discounted")
     return res.data.products
 }
+async function getProByCat(subid){
+    const res= await axios.get(`https://neptunbk.vercel.app/products/subcategory/${subid}`)
+    return res.data.products
+}
 
-export {getProducts ,getCategories ,getDiscounted}
+
+export {getProducts ,getCategories ,getDiscounted,getProByCat}

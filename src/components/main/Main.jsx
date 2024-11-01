@@ -9,14 +9,13 @@ import { IoCart } from "react-icons/io5";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation, EffectFade, FreeMode } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
 
 import { DATA } from '../../context/DataContext';
 
 function Main() {
   const {productData}=useContext(DATA)
   const {discountData}=useContext(DATA)
-  console.log(discountData)
 
   return (
     <main className='bg-[#F2F2F2]'>
