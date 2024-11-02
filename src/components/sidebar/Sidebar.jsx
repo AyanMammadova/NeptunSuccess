@@ -27,22 +27,22 @@ function Sidebar() {
 
     console.log(showCategory)
     return (
-        <div className='relative bg-white rounded-lg  w-[270px]' onMouseLeave={() => setShowCategory(false)}>
+        <div className='relative bg-white rounded-lg  w-[270px]' >
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
-            <p  className={`lg:flex hidden font-[600] h-[50px]  p-[10px] gap-[15px] text-[#FF8300] `} 
-                onMouseEnter={() => setShowCategory(true)}>
+            <p  className={`lg:flex hidden font-[600] h-[50px]  p-[10px] gap-[15px] text-[#FF8300] cursor-pointer`} 
+                onClick={() => setShowCategory(!showCategory)}>
                 <HiMiniBars4   className='text-[1.5em] '/> Kategoriyalar
             </p>  
-            <div className={`rounded-b-lg h-[10px] bg-[#FF8300] hidden lg:block   ${showCategory ? 'hidden' : 'block'}`}> </div>  
+            <div className={`rounded-b-lg h-[10px] bg-[#FF8300] hidden  z-10  ${showCategory ? 'hidden' : 'block'}`}> </div>  
             
-            <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} `} >
+            <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} z-50 bg-white`} >
                 {
                     categoryData && categoryData.map((item,i)=>{
                         return <a key={i}
                                 className={` ${item.subcategory.length>0 ? 'cursor-text' : 'cursor-auto'}`}
                                 onClick={(event) => 
                                     {if (item.subcategory.length > 0) {event.preventDefault()};
-                                    setShowCategory(false) }}
+                                    }}
                         >
                          <li  className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
                             <div className='flex items-center'>
