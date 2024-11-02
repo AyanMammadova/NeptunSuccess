@@ -125,6 +125,7 @@ function Header() {
     const [showmenu,setShowmenu]=useState(false)
     const [menuData,setMenudata]=useState(menudatam.map(item=>({...item,showdrops:false})))
     const [isfilled,setIsfilled]=useState('')
+    const [fixed,setFixed]=useState(false)
     function handlesidemenu(){
       handlecategorymenu()
         setShowmenu(!showmenu)
@@ -143,6 +144,14 @@ function Header() {
         console.log(newMenuData)
     }
 
+    onscroll = function () {
+      if (window.scrollY >= 750) {
+          setFixed(true)
+      } else {
+        setFixed(false)
+      }
+      console.log(fixed)
+  };
 
     return (
         <header  className='relative'>
@@ -209,7 +218,7 @@ function Header() {
                   </div>
 
               </section>
-              <section id='headersection2' className={`bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 `}>
+              <section id='headersection2' className={`${fixed ? 'fixed w-full z-50' : ''} top-0 bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 `}>
                   <div className={`w-[87%] m-[auto] flex h-[50px]  justify-between`}>
                       <div className='-m-[10px] '>
                           <div onClick={()=>handlecategorymenu()}>
