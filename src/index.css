@@ -167,7 +167,7 @@ body {
 }
 
 .rangeInput::-webkit-slider-runnable-track {
-  background-color: #FF8300; /* Orange color for track */
+  background-color: #FF8300; 
   height: 8px;
   border-radius: 4px;
 }

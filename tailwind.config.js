@@ -12,7 +12,9 @@ export default {
         md: '768px',  // Medium devices
         'bp840':'840px',
         'bp900':'900px',
+        'bp1000':'1000px',
         lg: '1024px', // Large devices
+        'bp1100':'1100px',
         'bp1200':'1200px',
         xl: '1280px', // Extra large devices
         'bp1380':'1380px',
