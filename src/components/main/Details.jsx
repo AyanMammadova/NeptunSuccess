@@ -10,12 +10,14 @@ import { FaArrowsRotate } from 'react-icons/fa6'
 
 function Details() {
   const [productsbyCategory, setProductsbyCategory] = useState(null)
+  const [pageId, setPageId] = useState(1)
+
   const { subid } = useParams()
   useEffect(() => {
-    getProByCat(subid).then(res => {
+    getProByCat(subid, pageId).then(res => {
       setProductsbyCategory(res)
     })
-  }, [subid])
+  }, [subid, pageId])
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => setIsOpen(!isOpen)
