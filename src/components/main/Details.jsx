@@ -12,7 +12,8 @@ function Details() {
   const [productsbyCategory, setProductsbyCategory] = useState(null)
   const [pageId, setPageId] = useState(1)
 
-  const { subid } = useParams()
+  const {subslug,subname, subid } = useParams()
+  console.log( subslug,subname, subid )
   useEffect(() => {
     getProByCat(subid, pageId).then(res => {
       setProductsbyCategory(res)
@@ -64,11 +65,11 @@ function Details() {
               <li className='flex items-center'>
                 <a href='#'> Ana Səhifə</a>
               </li>
-              <li className='flex items-center'><MdKeyboardArrowRight />
-                <a href='#'> Meyvə, tərəvəz, quru meyvə </a>
+              <li className='flex items-center capitalize'><MdKeyboardArrowRight />
+                <a href='#'> {subslug} </a>
               </li>
-              <li className='flex items-center'><MdKeyboardArrowRight />
-                <a href='#'> Meyvə</a>
+              <li className='flex items-center capitalize'><MdKeyboardArrowRight />
+                <a href='#'>{subname}</a>
               </li>
             </ul>
           </div>

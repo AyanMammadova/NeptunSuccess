@@ -130,18 +130,15 @@ function Header() {
       handlecategorymenu()
         setShowmenu(!showmenu)
         setShowcategorymenu(false)
-        // console.log(showmenu)
     }
     function handlecategorymenu(){
         setShowcategorymenu(!showcategorymenu)
     }
     function changedropstatus(index){
-        // console.log(menuData[index])
         const newMenuData=menuData.map((item,i)=>
           i==index ? {...item,showdrops:!item.showdrops} :item
         )
         setMenudata(newMenuData)
-        console.log(newMenuData)
     }
 
     onscroll = function () {
@@ -150,7 +147,6 @@ function Header() {
       } else {
         setFixed(false)
       }
-      console.log(fixed)
   };
 
     return (
@@ -284,7 +280,9 @@ function Header() {
                   
               </section>
               <div id='slidingcategory'  className={`absolute  z-40 h-full w-[40%] lg:hidden
-                  ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} xl:hidden transition-all duration-500`}>
+                  ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
+                  
+                   xl:hidden transition-all duration-500`}>
                   <Sidebar/>
 
               </div>
