@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
     const [showCategory,setShowCategory]=useState(true)
     const {categoryData}=useContext(DATA)
+    const [open, setOpen] = useState(true)
+
     const iconData=[
         'https://neptun.az/image/catalog/icon-menu/Meyv%C9%99-v%C9%99-t%C9%99r%C9%99v%C9%99z.svg',
         'https://neptun.az/image/catalog/icon-menu/%C9%99t-v%C9%99-toyuq%20m%C9%99hsullar%C4%B1.svg',
@@ -26,6 +28,7 @@ function Sidebar() {
     ]
 
     console.log(showCategory)
+
     return (
         <div className='relative bg-white rounded-lg  w-[270px]' >
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
