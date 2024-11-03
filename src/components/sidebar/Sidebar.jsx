@@ -26,11 +26,9 @@ function Sidebar() {
         'https://neptun.az/image/catalog/icon-menu/neptun-icon.svg',
         'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg'
     ]
-
     console.log(showCategory)
-
     return (
-        <div className='relative bg-white rounded-lg  w-[270px]' >
+        <div className='relative z-10 bg-white rounded-lg  w-[270px]' >
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
             <p  className={`lg:flex hidden font-[600] h-[50px]  p-[10px] gap-[15px] text-[#FF8300] cursor-pointer`} 
                 onClick={() => setShowCategory(!showCategory)}>
@@ -57,7 +55,7 @@ function Sidebar() {
                              <div className='absolute left-[150px] sm:left-full top-0 z-50 hidden group-hover:flex flex-col bg-white p-2 shadow-lg space-x-2 w-[250px] border-x-2 border-l-[#FF8300] border-r-[gray] transition-all ease-in-out duration-600'>
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
-                                            <Link to={`${subitem.id}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
+                                            <Link to={`/${subitem.slug}/${subitem.id}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
                                                 <div  className='flex'>
                                                         <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
                                                 </div>

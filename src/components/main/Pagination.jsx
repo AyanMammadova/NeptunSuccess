@@ -1,17 +1,15 @@
 import { FaMinus, FaPlus } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 function Pagination({probycat}) {
-  // const proby=probycat
-  console.log(probycat)
   return (
     <div className='flex mt-[40px] justify-between mx-[auto] min-h-[100vh] z-30'>
       <div>
         <div className='flex justify-around flex-wrap  gap-[30px]'>
           {
             probycat && probycat.map((item,id)=>{
-              return <>
-                    <div key={id} className='w-[180px]'>
-                      <a href="#">
+              return <div key={id} className='w-[180px]'>
+                      <Link  to={`/${item.name}/${item.id}`}>
                         <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
                           <img
                             className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
@@ -29,9 +27,9 @@ function Pagination({probycat}) {
                             Səbətə at
                           </button>
                         </div>
-                      </a>
+                      </Link>
                     </div>
-              </>
+             
             })
           }
         </div>

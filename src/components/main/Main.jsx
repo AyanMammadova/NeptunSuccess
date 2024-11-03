@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
 
 import { DATA } from '../../context/DataContext';
+import { Link } from 'react-router-dom';
 
 function Main() {
   const {productData}=useContext(DATA)
@@ -165,7 +166,7 @@ function Main() {
                   <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                     <CiHeart />
                   </div>
-                  <a href="#">
+                  <Link to={`/${item.name}/${item.id}`}>
                     <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
                       <img
                         className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
@@ -183,7 +184,7 @@ function Main() {
                         Səbətə at
                       </button>
                     </div>
-                  </a>
+                  </Link>
                 </SwiperSlide>
               ))
             }
@@ -230,7 +231,7 @@ function Main() {
                 <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
                   <CiHeart />
                 </div>
-                <a href='#'>
+                <Link to={`/${item.name}/${item.id}`}>
                   <div className='productSlide bg-white text-center h-[100%] flex flex-col rounded-2xl py-[25px] px-[20px] '>
                     <img className='rounded-3xl inline-block object-contain w-[100px]' src={item.img} alt="" />
                     <p className='text-[10px] font-[700] overflow-hidden text-ellipsis whitespace-nowrap w-[90%] '>{item.name}</p>
@@ -251,26 +252,8 @@ function Main() {
                     <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] hidden lg:block'>Səbətə at</button>
                     <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] m-[auto] lg:hidden'><IoCart /></button>
                   </div>
-                </a>
-                {/* <a href="#">
-                  <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
-                    <img
-                      className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
-                      src={item.img}
-                      alt={item.name}
-                    />
-                    <p className="text-[10px] font-[600]">{item.name}</p>
-                    <p className="xl:text-[18px]">{item.price}₼</p>
-                    <div className="flex justify-center items-center">
-                      <FaMinus className="text-[#FF8300] cursor-pointer" />
-                      <span className="p-[10px] text-[12px]">1 ədəd</span>
-                      <FaPlus className="text-[#FF8300] cursor-pointer" />
-                    </div>
-                    <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
-                      Səbətə at
-                    </button>
-                  </div>
-                </a> */}
+                </Link>
+                
               </SwiperSlide>)
           }
 
@@ -316,7 +299,7 @@ function Main() {
                 <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
                   <CiHeart />
                 </div>
-                <a href="#">
+                <Link  to={`/${item.name}/${item.id}`}>
                   <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
                     <img
                       className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
@@ -334,7 +317,7 @@ function Main() {
                       Səbətə at
                     </button>
                   </div>
-                </a>
+                </Link>
               </SwiperSlide>
             ))
 

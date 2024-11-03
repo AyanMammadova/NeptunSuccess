@@ -8,7 +8,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 function Footer() {
   return (
-    <div>
+    <div >
       <div className='bg-[#FF8300] h-[756px] flex justify-between py-[25px] pl-[25px]'>
         <div className='w-[75%]'>
           <div className='flex justify-between items-start'>
