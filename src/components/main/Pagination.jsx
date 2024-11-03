@@ -1,7 +1,11 @@
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 function Pagination({probycat}) {
+
+  const [pageId, setPageId] = useState(1)
+
   return (
     <div className='flex mt-[40px] justify-between mx-[auto] min-h-[100vh] z-30'>
       <div>
