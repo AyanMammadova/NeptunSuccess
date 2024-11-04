@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import Pagination from './Pagination'
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 import { getProByCat } from '../../services/api'
 import { PiSquaresFourFill } from 'react-icons/pi'
 import { BsList } from 'react-icons/bs'
 import { FaArrowsRotate } from 'react-icons/fa6'
+import { FaMinus, FaPlus } from 'react-icons/fa'
 
 
 function Details() {
   const [productsbyCategory, setProductsbyCategory] = useState(null)
+  const { subslug, subname, subid } = useParams()
   const [pageId, setPageId] = useState(1)
 
-  const {subslug,subname, subid } = useParams()
-  console.log( subslug,subname, subid )
+  // console.log(subslug, subname, subid)
+
   useEffect(() => {
     getProByCat(subid, pageId).then(res => {
       setProductsbyCategory(res)
@@ -133,8 +134,61 @@ function Details() {
               </button>
             </div>
           </div>
-          <div className='w-full'>
-            <Pagination probycat={productsbyCategory} />
+          <div className="flex flex-col justify-center items-center space-x-1 mt-[30px]">
+            <div className='flex justify-around flex-wrap gap-[30px]'>
+              {productsbyCategory && productsbyCategory.map((item, id) => (
+                <div key={item.id || id} className='w-[180px]'>
+                  <a href="#">
+                    <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
+                      <img
+                        className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
+                        src={item.img}
+                        alt={item.name}
+                      />
+                      <p className="text-[10px] font-[600]">{item.name}</p>
+                      <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
+                      <div className="flex justify-center items-center">
+                        <FaMinus className="text-[#FF8300] cursor-pointer" />
+                        <span className="p-[10px] text-[12px]">1 ədəd</span>
+                        <FaPlus className="text-[#FF8300] cursor-pointer" />
+                      </div>
+                      <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                        Səbətə at
+                      </button>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className='flex gap-2 mt-[30px]'>
+              <button
+                title="previous"
+                type="button"
+                className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md dark:bg-gray-50 dark:border-gray-100"
+              >
+                <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="w-4">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+
+              {
+                Array(productsbyCategory && productsbyCategory.totalPages).fill("").map((_, i) => (
+                  <button onClick={() => {
+                    setPageId(i+1)
+                  }} type="button" title={`Page ${i+1}`} className="inline-flex items-center justify-center w-8 h-8 text-sm font-semibold border rounded shadow-md bg-white text-[#ff8300]">{i + 1}</button>
+                ))
+              }
+
+              <button
+                title="next"
+                type="button"
+                className="inline-flex items-center justify-center w-8 h-8 py-0 border rounded-md shadow-md dark:bg-gray-50 dark:border-gray-100"
+              >
+                <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="w-4">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
