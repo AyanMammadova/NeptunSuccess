@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
       screens: {
+        'bp400':'400px',
         'bp600':'600px',
         sm: '640px',  // Small devices
         md: '768px',  // Medium devices

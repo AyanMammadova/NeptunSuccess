@@ -1,7 +1,11 @@
 import axios from "axios"
 
 async function getProducts(){
-    const res = await axios.get("https://neptunbk.vercel.app/products?limit=20")
+    const res = await axios.get("https://neptunbk.vercel.app/products?limit=20&&page=5")
+    return res.data.products
+}
+async function getPopulyar(){
+    const res = await axios.get("https://neptunbk.vercel.app/products?limit=20&&page=5")
     return res.data.products
 }
 async function getCategories(){
@@ -14,8 +18,8 @@ async function getDiscounted(){
 }
 async function getProByCat(subid, pageId = 1){
     const res= await axios.get(`https://neptunbk.vercel.app/products/subcategory/${subid}?page=${pageId}`)
-    return res.data.products
+    return res.data
 }
 
 
-export {getProducts ,getCategories ,getDiscounted,getProByCat}
+export {getProducts ,getCategories ,getDiscounted,getProByCat,getPopulyar}
