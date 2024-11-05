@@ -143,7 +143,7 @@ function Main() {
                                               {/*PRODUCT DATA SWIPER */}
         <div className='my-[30px] lg:w-[70%] w-[100%]'>
                                                 
-          <Carousel currentData={productData}/>
+          <Carousel current={[productData,'product']}/>
          
         </div>
         
@@ -156,7 +156,7 @@ function Main() {
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
                                                  {/*DISCOUNT DATA SWIPER */}
-        <Carousel currentData={discountData}/>
+        <Carousel current={[discountData,'discount']}/>
 
       </div>
       
@@ -167,7 +167,7 @@ function Main() {
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
                                                     {/*POPULYAR DATA SWIPER */}
-        <Carousel currentData={populyarData}/>
+        <Carousel current={[populyarData,'popular']}/>
         
       </div>
 

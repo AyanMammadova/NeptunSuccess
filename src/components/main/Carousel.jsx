@@ -13,8 +13,9 @@ import { Link } from 'react-router-dom';
 import { FaMinus, FaPlus } from 'react-icons/fa6';
 import { IoCart } from 'react-icons/io5';
 
-function Carousel({currentData}) {
-    
+function Carousel({current}) {
+  const [currentData, type] = current
+  // console.log(type, currentData);
   return (
     <>
     <Swiper 
@@ -29,13 +30,18 @@ function Carousel({currentData}) {
           }}
           navigation={true}
           // centeredSlides={true}
-          breakpoints={
+          breakpoints={type=='product' ? 
             {
                 640: { slidesPerView: 2, spaceBetween: 20 },
                 768: { slidesPerView: 3, spaceBetween: 40 },
-                1024: { slidesPerView: 4, spaceBetween: 50 },
+                1024: { slidesPerView: 3, spaceBetween: 50 },
+            }: 
+            {   640: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 40 },
+                1024: { slidesPerView: 5, spaceBetween: 50 }
             }
-        }
+          
+          }
          
           modules={[Pagination, Autoplay, Navigation]}
           className="mySwiper2"
@@ -50,8 +56,9 @@ function Carousel({currentData}) {
                   <div className='productSlide bg-white text-center h-[100%] flex flex-col rounded-2xl py-[25px] px-[20px] '>
                     <img className='rounded-3xl inline-block object-contain w-[100px]' src={item.img} alt="" />
                     <p className='text-[10px] font-[700] overflow-hidden text-ellipsis whitespace-nowrap w-[90%] '>{item.name}</p>
-                    <div className='flex items-center justify-center gap-5 '>
-                      <div>
+                    {/*  */}
+                    <div className={` items-center justify-center gap-5 ${type=='discount' ? 'flex' : 'hidden'}`}>
+                      <div className={`${type=='discount' ? 'block' : ''}`}>
                         <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>{item.discount}%</button>
                       </div>
                       <div>
@@ -59,6 +66,9 @@ function Carousel({currentData}) {
                         <p className='xl:text-[18px]'>{item.totalPrice.toFixed(2)}₼</p>
                       </div>
                     </div>
+                    {/*  */}
+                    <p className={`xl:text-[18px] ${type=='discount' ? 'hidden' : 'block'}`}>{item.price.toFixed(2)}₼</p>
+                    
                     <div className='flex justify-center items-center '>
                       <FaMinus className='text-[#FF8300] cursor-pointer' />
                       <span className='p-[10px] text-[12px]'>1ədəd</span>
