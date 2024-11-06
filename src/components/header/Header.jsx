@@ -162,20 +162,20 @@ function Header() {
                           <IoCloseCircleOutline onClick={()=>handlesidemenu()}  className='absolute right-[10px]  top-[10px] cursor-pointer text-[1.5em]'/>
                           {menuData.map((item,i)=>{
                             return <li key={i} className='relative  cursor-pointer group'>
-                                      <span className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
+                                      <Link to={'/'} className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
                                         {item.menuName} 
                                         {item.showdrops ?
                                         <FaMinusSquare  onClick={()=>changedropstatus(i)} className={` text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> :
                                         <FaPlusSquare  onClick={()=>changedropstatus(i)} className={`text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> 
                                         }
-                                        </span>
+                                        </Link>
                                             
                                         { item.showdrops ? (
                                             <>
                                                 <ul>
                                                     {
                                                     item.submenu.map((subitem,subi)=>(
-                                                        <li className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</li>
+                                                        <Link to={'/'} className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</Link>
                                                     ))
                                                     }
                                                 </ul> 
@@ -233,7 +233,7 @@ function Header() {
                               {
                                   menuData.map((item,i)=>{
                                       return <li key={i} className='relative flex items-center h-[50px] cursor-pointer hover:text-[#EEEEEE] group'>
-                                                  <span>{item.menuName}</span>
+                                                  <Link to={'/'}>{item.menuName}</Link>
                                                       {
                                                           item.submenu.length>0 && (
                                                               <>
@@ -241,7 +241,7 @@ function Header() {
                                                                   <div  className='absolute top-full hidden group-hover:flex flex-col bg-white p-2 space-x-2 w-[250px] rounded-b-lg transition-all ease-in-out duration-600 shadow-lg'>
                                                                       {item.submenu.map((subitem,subi)=>(
                                                                       <div key={subi} className='flex'>
-                                                                          <span className='text-black p-[15px]'>{subitem.menuName}</span>
+                                                                          <Link to={'/'} className='text-black p-[15px]'>{subitem.menuName}</Link>
                                                                       </div>
                                                                       ))}
                                                                   </div>

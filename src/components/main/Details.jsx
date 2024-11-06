@@ -7,6 +7,7 @@ import { BsList } from 'react-icons/bs'
 import { FaArrowsRotate } from 'react-icons/fa6'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { Pagination } from 'antd'
+import Loader from './Loader'
 // import { Pagination } from 'swiper/modules'
 
 
@@ -140,7 +141,8 @@ function Details() {
 
             <div className="flex flex-col justify-center items-center space-x-1 mt-[30px]">
               <div className='flex bp400:justify-center  justify-around flex-wrap gap-[20px]'>
-                {productsbyCategory && productsbyCategory.products.map((item, id) => (
+                {
+                  productsbyCategory  ? productsbyCategory.products.map((item, id) => (
                   <div key={item.id || id} className='w-[180px]'>
                     <Link to={`/${item.name}/${item.id}`}>
                       <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
@@ -162,7 +164,11 @@ function Details() {
                       </div>
                     </Link>
                   </div>
-                ))}
+                ))
+                :
+                  Array(10).fill('skdbcj').map((_,i)=> <Loader key={i}/>)
+                  
+                }
               </div>
               <div className='flex gap-2 mt-[30px]'>
                 <button

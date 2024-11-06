@@ -124,9 +124,16 @@ body {
 ::-webkit-scrollbar-track {
   background: #C7C7C7;
 }
-
 ::-webkit-scrollbar-thumb {
-  background-color: #CD6900;
+  background: linear-gradient(
+    45deg,
+    #FF0000,
+    #FF7F00,
+    #FFFF00,
+    #8B00FF,
+    #00FF00
+   
+  );
   border-radius: 1px;
 }
 

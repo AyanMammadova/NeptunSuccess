@@ -1,6 +1,7 @@
 import React from 'react'
 import { AiTwotoneCloseSquare } from "react-icons/ai";
 import { FiTrash2 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 function Modal() {
   return (
@@ -27,17 +28,20 @@ function Modal() {
           </button>
         </div>
 
-        {/* Total Price Section */}
         <div className="flex justify-between items-center font-semibold text-lg mb-4">
           <p>Ümumi məbləğ:</p>
           <p>1.95₼</p>
         </div>
 
-        {/* Buttons Section */}
         <div className="flex justify-between">
-          <button className="bg-gray-500 text-white px-4 py-2 rounded-md">Səbət</button>
+          <Link to={'/basket'}>
+            <button className="bg-gray-500 text-white px-4 py-2 rounded-md">Səbət</button>
+          </Link>
+          <Link>
           <button className="bg-[#FF8300] text-white px-4 py-2 rounded-md">Sifarişi rəsmiləşdir</button>
+          </Link>
         </div>
+
       </div>
     </div>
   )
