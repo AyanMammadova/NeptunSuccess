@@ -1,16 +1,25 @@
 import React, { createContext, useState } from 'react'
+import { Cookies } from 'react-cookie'
 
-const BASKETDATA=createContext(null)
+
+export const BASKET=createContext(null)
 function BasketContext({children}) {
-    console.log(children)
-    const [basket,setBasket]=useState(null)
+    
+    const cooki=new Cookies()
+    const [basket,setBasket]=useState(cooki.get('basket') || [])
+    function addToBasket(id,img,name,count,price,discount){
+        // console.log(id,img,name,count,price,discount)
+        setBasket([...basket,{id,img,name,count,price,discount}])
+        console.log(basket)
+        cooki.set('basket',basket)
+    }
     return (
         <div>
-        <BASKETDATA.Provider
-        value={{basket,setBasket}}
+        <BASKET.Provider
+        value={{basket,setBasket,addToBasket}}
         >
             {children}
-        </BASKETDATA.Provider>
+        </BASKET.Provider>
         </div>
     )
 }

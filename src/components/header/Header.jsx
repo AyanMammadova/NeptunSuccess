@@ -13,8 +13,8 @@ import { FaPlusSquare } from "react-icons/fa";
 import { FaMinusSquare } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { BiMenuAltLeft } from "react-icons/bi";
-import Modal from '../main/Modal';
 import { Link } from 'react-router-dom';
+import Modal from './Modal';
 
 
 function Header() {
@@ -162,7 +162,7 @@ function Header() {
                           <IoCloseCircleOutline onClick={()=>handlesidemenu()}  className='absolute right-[10px]  top-[10px] cursor-pointer text-[1.5em]'/>
                           {menuData.map((item,i)=>{
                             return <li key={i} className='relative  cursor-pointer group'>
-                                      <Link to={'/'} className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
+                                      <Link  className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
                                         {item.menuName} 
                                         {item.showdrops ?
                                         <FaMinusSquare  onClick={()=>changedropstatus(i)} className={` text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> :
@@ -172,10 +172,10 @@ function Header() {
                                             
                                         { item.showdrops ? (
                                             <>
-                                                <ul>
+                                                <ul className='flex flex-col'>
                                                     {
                                                     item.submenu.map((subitem,subi)=>(
-                                                        <Link to={'/'} className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</Link>
+                                                        <Link  className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</Link>
                                                     ))
                                                     }
                                                 </ul> 
@@ -265,14 +265,14 @@ function Header() {
                                   {isfilled ? <GoHeartFill className='text-[1.5em] cursor-pointer'/>: <GoHeart className='text-[1.5em] cursor-pointer'/>}
                               </div>
                               <SlRefresh className='text-[1.5em] hover:rotate-[180deg] transition-transform duration-500    cursor-pointer'/>
-                              <div className='relative '
-                                    onClick={()=>{setModal(!modal)}} 
-                              >
+                              <div className='relative'>
+                                  <div  onClick={()=>{setModal(!modal)}} >
                                   <MdOutlineShoppingCart  className='text-[1.5em] cursor-pointer'/>
                                   <div className=' absolute bg-[#00FF00] px-[3px] py-0 text-black text-[.8em] -right-[5px] -top-[13px] rounded-lg'>0</div>
                                   
+                                  </div>
                                   <div className={`${modal ? 'block' : 'hidden'}`}>
-                                    <Modal/>
+                                    <Modal status={modal}/>
                                   </div>
                               
                               </div>

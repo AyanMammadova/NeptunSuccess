@@ -5,7 +5,7 @@ async function getProducts(){
     return res.data.products
 }
 async function getPopulyar(){
-    const res = await axios.get("https://neptunbk.vercel.app/products?limit=20&&page=5")
+    const res = await axios.get("https://neptunbk.vercel.app/products?limit=20&&page=2")
     return res.data.products
 }
 async function getCategories(){
