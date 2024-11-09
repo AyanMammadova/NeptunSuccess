@@ -11,7 +11,7 @@
   import { Link } from 'react-router-dom';
   import { FaMinus, FaPlus } from 'react-icons/fa6';
   import { IoCart } from 'react-icons/io5';
-  import BasketContext, { BASKET } from '../../context/BasketContext';
+  import { BASKET } from '../../context/BasketContext';
 
   function Carousel({current}) {
     const [currentData, type] = current
@@ -33,7 +33,6 @@
       if (product.count < 1) {
         product.count = 1;
       }
-      console.log(product)
       setData(newData)
     }
     

@@ -224,8 +224,8 @@ function Header() {
                           <div onClick={()=>handlecategorymenu()}>
                               <BiMenuAltLeft className='block lg:hidden text-[2em] bp600:text-[3em] mt-[15px] bp600:mt-[10px] cursor-pointer' />
                           </div>                 
-                          <div className={`hidden lg:block `}>
-                              <Sidebar/>
+                          <div className={`hidden lg:block  `}>
+                              <Sidebar isFixed={fixed}/>
                           </div>
                       </div>
                       <div id='menu' className='hidden xl:flex'>

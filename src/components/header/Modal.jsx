@@ -12,7 +12,6 @@ function Modal({status}) {
   },[status])
 
   const {basket}=useContext(BASKET)
-  console.log(basket)
   return (
     <div
     className={`${m ? 'block' : 'hidden'}  inset-0 absolute border-t-[6px] border-orange-600 top-[50px] md:-left-[300px] -left-[200px] min-w-[290px] bg-black bg-opacity-20 z-50 `}>

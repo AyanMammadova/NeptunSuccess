@@ -71,7 +71,8 @@ function ProductById() {
                 <FaPlus className='text-[#FF8300] cursor-pointer' />
             </div>
             <div className='flex gap-[30px]'>
-              <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] hidden lg:block'>Səbətə at</button>
+              <button 
+              className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] hidden lg:block'>Səbətə at</button>
               <div className='flex p-[0px] items-center gap-[10px] text-[#FF8300]'>
                   <div onMouseEnter={()=>setIsfilled(true)}
                             onMouseLeave={()=>setIsfilled(false)}>

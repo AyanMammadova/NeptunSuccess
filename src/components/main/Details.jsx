@@ -20,8 +20,7 @@ function Details() {
     getProByCat(subid, pageId).then(res => {
       setProductsbyCategory(res)
     })
-  }, [subid, pageId])
-  // console.log(pageId)  
+  }, [subid, pageId]) 
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => setIsOpen(!isOpen)
