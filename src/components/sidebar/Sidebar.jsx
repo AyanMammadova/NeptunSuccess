@@ -26,7 +26,6 @@ function Sidebar() {
         'https://neptun.az/image/catalog/icon-menu/neptun-icon.svg',
         'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg'
     ]
-    console.log(showCategory)
     return (
         <div className='relative z-10 bg-white rounded-lg  w-[270px]' >
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>

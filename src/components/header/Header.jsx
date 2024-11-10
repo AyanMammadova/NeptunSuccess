@@ -13,6 +13,8 @@ import { FaPlusSquare } from "react-icons/fa";
 import { FaMinusSquare } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { BiMenuAltLeft } from "react-icons/bi";
+import Modal from '../main/Modal';
+
 
 function Header() {
     const menudatam = [
@@ -126,6 +128,7 @@ function Header() {
     const [menuData,setMenudata]=useState(menudatam.map(item=>({...item,showdrops:false})))
     const [isfilled,setIsfilled]=useState('')
     const [fixed,setFixed]=useState(false)
+    const [modal,setModal]=useState(false)
     function handlesidemenu(){
       handlecategorymenu()
         setShowmenu(!showmenu)
@@ -261,10 +264,18 @@ function Header() {
                                   {isfilled ? <GoHeartFill className='text-[1.5em] cursor-pointer'/>: <GoHeart className='text-[1.5em] cursor-pointer'/>}
                               </div>
                               <SlRefresh className='text-[1.5em] hover:rotate-[180deg] transition-transform duration-500    cursor-pointer'/>
-                              <div className='relative'>
-                                  <MdOutlineShoppingCart  className='text-[1.5em]'/>
+                              <div className='relative '
+                                    onClick={()=>{setModal(!modal)}} 
+                              >
+                                  <MdOutlineShoppingCart  className='text-[1.5em] cursor-pointer'/>
                                   <div className=' absolute bg-[#00FF00] px-[3px] py-0 text-black text-[.8em] -right-[5px] -top-[13px] rounded-lg'>0</div>
+                                  
+                                  <div className={`${modal ? 'block' : 'hidden'}`}>
+                                    <Modal/>
+                                  </div>
+                              
                               </div>
+                              
                               
                           
 

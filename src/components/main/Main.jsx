@@ -1,26 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BsArrowRight } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
+import { FaCarOn, FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { IoCart } from "react-icons/io5";
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
 
 import { DATA } from '../../context/DataContext';
-import { Link } from 'react-router-dom';
+import Carousel from './Carousel';
 
 function Main() {
   const {productData}=useContext(DATA)
   const {discountData}=useContext(DATA)
+  const {populyarData}=useContext(DATA)
 
   return (
     <main className='bg-[#F2F2F2]'>
       <div className='lg:ml-[350px] 2xl:ml-[400px]'>
+       
         <div className='pt-[20px] w-[90%] mx-[auto]'>
           <Swiper
             effect="fade"
@@ -93,8 +95,11 @@ function Main() {
           </div>
         </div >
       </div>
+
       <p className='text-right w-[95%] text-[#FF8300] cursor-pointer'>Hamısına bax</p>
+      
       <div className='w-[90%] m-[auto] mt-[30px]  gap-[20px] lg:flex 2xl:justify-between items-center  pb-[20px] '>
+        
         <div className='hidden md:block lg:w-[30%] w-[100%] rounded-lg'>
           <Swiper id='reklamswiper'
             slidesPerView={1}
@@ -135,196 +140,35 @@ function Main() {
             }
           </Swiper>
         </div>
+                                              {/*PRODUCT DATA SWIPER */}
         <div className='my-[30px] lg:w-[70%] w-[100%]'>
-          <Swiper 
-            slidesPerView={1}
-            spaceBetween={10}
-            pagination={{
-              clickable: true,
-            }}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            navigation={true}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 40,
-              },
-            }}
-            modules={[Pagination, Autoplay, Navigation]}
-            className="mySwiper2"
-          >
-            {
-              productData && productData.map((item, i) => (
-                <SwiperSlide className="relative" key={i}>
-                  <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
-                    <CiHeart />
-                  </div>
-                  <Link to={`/${item.name}/${item.id}`}>
-                    <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
-                      <img
-                        className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
-                        src={item.img}
-                        alt={item.name}
-                      />
-                      <p className="text-[10px] font-[600]">{item.name}</p>
-                      <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
-                      <div className="flex justify-center items-center">
-                        <FaMinus className="text-[#FF8300] cursor-pointer" />
-                        <span className="p-[10px] text-[12px]">1 ədəd</span>
-                        <FaPlus className="text-[#FF8300] cursor-pointer" />
-                      </div>
-                      <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
-                        Səbətə at
-                      </button>
-                    </div>
-                  </Link>
-                </SwiperSlide>
-              ))
-            }
-          </Swiper>
+                                                
+          <Carousel current={[productData,'product']}/>
+         
         </div>
+        
       </div>
+      
       <div className='w-[87%] mx-auto py-[50px] '>
+        
         <div className='flex justify-between items-center mb-[20px]'>
           <div>Endirimli məhsullar</div>
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
-        <Swiper id='discountswiper'
-          slidesPerView={2}
-          spaceBetween={10}
-          pagination={{
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 2400,
-            disableOnInteraction: false,
-          }}
-          navigation={true}
-          // centeredSlides={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
-          }}
-          modules={[Pagination, Autoplay, Navigation]}
-          className="mySwiper2"
-        >
-          {
-            discountData && discountData.map((item,i) =>
-              <SwiperSlide key={i} className=' relative'>
-                <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
-                  <CiHeart />
-                </div>
-                <Link to={`/${item.name}/${item.id}`}>
-                  <div className='productSlide bg-white text-center h-[100%] flex flex-col rounded-2xl py-[25px] px-[20px] '>
-                    <img className='rounded-3xl inline-block object-contain w-[100px]' src={item.img} alt="" />
-                    <p className='text-[10px] font-[700] overflow-hidden text-ellipsis whitespace-nowrap w-[90%] '>{item.name}</p>
-                    <div className='flex items-center justify-center gap-5 '>
-                      <div>
-                        <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>{item.discount}%</button>
-                      </div>
-                      <div>
-                        <del className='text-[14px] text-gray-400'>{item.price.toFixed(2)}₼</del>
-                        <p className='xl:text-[18px]'>{item.totalPrice.toFixed(2)}₼</p>
-                      </div>
-                    </div>
-                    <div className='flex justify-center items-center '>
-                      <FaMinus className='text-[#FF8300] cursor-pointer' />
-                      <span className='p-[10px] text-[12px]'>1ədəd</span>
-                      <FaPlus className='text-[#FF8300] cursor-pointer' />
-                    </div>
-                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] hidden lg:block'>Səbətə at</button>
-                    <button className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] m-[auto] lg:hidden'><IoCart /></button>
-                  </div>
-                </Link>
-                
-              </SwiperSlide>)
-          }
+                                                 {/*DISCOUNT DATA SWIPER */}
+        <Carousel current={[discountData,'discount']}/>
 
-        </Swiper>
       </div>
+      
       <div className='w-[87%] mx-auto py-[50px] mt-[50px]'>
+       
         <div className='flex justify-between items-center mb-[20px]'>
           <div>Ən çox satılanlar</div>
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
-        <Swiper id='topselling'
-          slidesPerView={2}
-          spaceBetween={10}
-          pagination={{
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          navigation={true}
-          // centeredSlides={true}
-          breakpoints={{
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
-          }}
-          modules={[Pagination, Autoplay, Navigation]}
-          className="mySwiper2"
-        >
-          {
-            productData && productData.map((item, i) => (
-              <SwiperSlide className="relative" key={i}>
-                <div className="text-[30px] absolute hover:text-[#FF8300] top-2 right-2">
-                  <CiHeart />
-                </div>
-                <Link  to={`/${item.name}/${item.id}`}>
-                  <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
-                    <img
-                      className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
-                      src={item.img}
-                      alt={item.name}
-                    />
-                    <p className="text-[10px] font-[600]  overflow-hidden text-ellipsis whitespace-nowrap w-[90%] ">{item.name}</p>
-                    <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
-                    <div className="flex justify-center items-center">
-                      <FaMinus className="text-[#FF8300] cursor-pointer" />
-                      <span className="p-[10px] text-[12px]">1ədəd</span>
-                      <FaPlus className="text-[#FF8300] cursor-pointer" />
-                    </div>
-                    <button className="text-white py-[3px] px-[15px] text-[.7em] rounded-2xl bg-[#FF8300]">
-                      Səbətə at
-                    </button>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))
-
-          }
-
-
-        </Swiper>
+                                                    {/*POPULYAR DATA SWIPER */}
+        <Carousel current={[populyarData,'popular']}/>
+        
       </div>
 
 
