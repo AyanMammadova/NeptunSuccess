@@ -2,11 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { IoIosArrowForward } from "react-icons/io";
 import { HiMiniBars4 } from "react-icons/hi2";
 import { DATA } from '../../context/DataContext';
-import { Link } from 'react-router-dom';
-function Sidebar() {
-    const [showCategory,setShowCategory]=useState(true)
+import { Link, useFetcher, useLocation } from 'react-router-dom';
+function Sidebar({isFixed}) {
+    const location = useLocation();
+    const [showCategory,setShowCategory]=useState(undefined)
+   
+    useEffect(()=>{isFixed ? setShowCategory(false) : setShowCategory(true)},[isFixed])
+    useEffect(() => {(location.pathname == '/') ? setShowCategory(true) :setShowCategory(false)}, [location])
+    
+    
     const {categoryData}=useContext(DATA)
-    const [open, setOpen] = useState(true)
 
     const iconData=[
         'https://neptun.az/image/catalog/icon-menu/Meyv%C9%99-v%C9%99-t%C9%99r%C9%99v%C9%99z.svg',

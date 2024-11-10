@@ -13,7 +13,8 @@ import { FaPlusSquare } from "react-icons/fa";
 import { FaMinusSquare } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { BiMenuAltLeft } from "react-icons/bi";
-import Modal from '../main/Modal';
+import { Link } from 'react-router-dom';
+import Modal from './Modal';
 
 
 function Header() {
@@ -161,20 +162,20 @@ function Header() {
                           <IoCloseCircleOutline onClick={()=>handlesidemenu()}  className='absolute right-[10px]  top-[10px] cursor-pointer text-[1.5em]'/>
                           {menuData.map((item,i)=>{
                             return <li key={i} className='relative  cursor-pointer group'>
-                                      <span className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
+                                      <Link  className={`border-b-2 ${item.showdrops ? 'border-orange-400' : ''} m-[20px] w-[100%] hover:text-[#FF8300] flex items-center justify-between py-[5px]`}>
                                         {item.menuName} 
                                         {item.showdrops ?
                                         <FaMinusSquare  onClick={()=>changedropstatus(i)} className={` text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> :
                                         <FaPlusSquare  onClick={()=>changedropstatus(i)} className={`text-[#FF8300] ${item.submenu.length>1 ? 'block' : 'hidden'}`} /> 
                                         }
-                                        </span>
+                                        </Link>
                                             
                                         { item.showdrops ? (
                                             <>
-                                                <ul>
+                                                <ul className='flex flex-col'>
                                                     {
                                                     item.submenu.map((subitem,subi)=>(
-                                                        <li className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</li>
+                                                        <Link  className='px-[40px] py-[10px]' key={subi}>{subitem.menuName}</Link>
                                                     ))
                                                     }
                                                 </ul> 
@@ -189,9 +190,9 @@ function Header() {
               <section id='headersection1' className={` bg-white flex  items-center `}>
                   <div className='bp600:w-[87%] w-[95%] m-[auto] flex justify-between'>
                       <div className='flex items-center justify-between sm:justify-start  w-[100%]'>
-                          <a href="/">
+                          <Link to={'/'}>
                             <img src="../img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
-                          </a>
+                          </Link>
                           <div className='relative w-[150px] bp600:w-[300px] bp600:mr-[30px] xl:w-[500px] border-[1px] rounded-3xl border-[#FF8300] h-[35px] bp600:h-[44px] flex items-center  justify-between' >
                               <FaSearch  className='text-[orange] absolute left-[5px] hidden bp600:block'/>
                               <input  type="text" className='absolute w-[50px] left-[10px] bp600:left-[30px] ' placeholder='axtar..'/>
@@ -223,8 +224,8 @@ function Header() {
                           <div onClick={()=>handlecategorymenu()}>
                               <BiMenuAltLeft className='block lg:hidden text-[2em] bp600:text-[3em] mt-[15px] bp600:mt-[10px] cursor-pointer' />
                           </div>                 
-                          <div className={`hidden lg:block `}>
-                              <Sidebar/>
+                          <div className={`hidden lg:block  `}>
+                              <Sidebar isFixed={fixed}/>
                           </div>
                       </div>
                       <div id='menu' className='hidden xl:flex'>
@@ -232,7 +233,7 @@ function Header() {
                               {
                                   menuData.map((item,i)=>{
                                       return <li key={i} className='relative flex items-center h-[50px] cursor-pointer hover:text-[#EEEEEE] group'>
-                                                  <span>{item.menuName}</span>
+                                                  <Link to={'/'}>{item.menuName}</Link>
                                                       {
                                                           item.submenu.length>0 && (
                                                               <>
@@ -240,7 +241,7 @@ function Header() {
                                                                   <div  className='absolute top-full hidden group-hover:flex flex-col bg-white p-2 space-x-2 w-[250px] rounded-b-lg transition-all ease-in-out duration-600 shadow-lg'>
                                                                       {item.submenu.map((subitem,subi)=>(
                                                                       <div key={subi} className='flex'>
-                                                                          <span className='text-black p-[15px]'>{subitem.menuName}</span>
+                                                                          <Link to={'/'} className='text-black p-[15px]'>{subitem.menuName}</Link>
                                                                       </div>
                                                                       ))}
                                                                   </div>
@@ -264,14 +265,14 @@ function Header() {
                                   {isfilled ? <GoHeartFill className='text-[1.5em] cursor-pointer'/>: <GoHeart className='text-[1.5em] cursor-pointer'/>}
                               </div>
                               <SlRefresh className='text-[1.5em] hover:rotate-[180deg] transition-transform duration-500    cursor-pointer'/>
-                              <div className='relative '
-                                    onClick={()=>{setModal(!modal)}} 
-                              >
+                              <div className='relative'>
+                                  <div  onClick={()=>{setModal(!modal)}} >
                                   <MdOutlineShoppingCart  className='text-[1.5em] cursor-pointer'/>
                                   <div className=' absolute bg-[#00FF00] px-[3px] py-0 text-black text-[.8em] -right-[5px] -top-[13px] rounded-lg'>0</div>
                                   
+                                  </div>
                                   <div className={`${modal ? 'block' : 'hidden'}`}>
-                                    <Modal/>
+                                    <Modal status={modal}/>
                                   </div>
                               
                               </div>
