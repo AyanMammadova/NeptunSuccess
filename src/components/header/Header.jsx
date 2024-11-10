@@ -218,15 +218,22 @@ function Header() {
                   </div>
 
               </section>
-              <section id='headersection2' className={`${fixed ? 'fixed w-full z-50' : ''} top-0 bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 `}>
+              <section id='headersection2' className={`${fixed ? 'fixed w-full  z-50' : ''} top-0 bg-[#FF8300] flex text-white  justify-between items-center shadow-lg shadow-gray-400 `}>
                   <div className={`w-[87%] m-[auto] flex h-[50px]  justify-between`}>
                       <div className='-m-[10px] '>
                           <div onClick={()=>handlecategorymenu()}>
                               <BiMenuAltLeft className='block lg:hidden text-[2em] bp600:text-[3em] mt-[15px] bp600:mt-[10px] cursor-pointer' />
                           </div>                 
                           <div className={`hidden lg:block  `}>
-                              <Sidebar isFixed={fixed}/>
+                              <Sidebar/>
                           </div>
+                      </div>
+                      <div id='slidingcategory'  className={`absolute top-[150px] left-[0px] ${fixed ? 'top-[49px]' : ''} z-40 h-full w-[40%] lg:hidden
+                          ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
+                          
+                          xl:hidden transition-all duration-500`}>
+                          <Sidebar/>
+
                       </div>
                       <div id='menu' className='hidden xl:flex'>
                           <ul className='flex items-center h-[50px] gap-[25px] z-50 text-[.8em] font-[500]'>
@@ -291,13 +298,7 @@ function Header() {
                   </div>
                   
               </section>
-              <div id='slidingcategory'  className={`absolute  z-40 h-full w-[40%] lg:hidden
-                  ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
-                  
-                   xl:hidden transition-all duration-500`}>
-                  <Sidebar/>
-
-              </div>
+              
               
             </div>
         

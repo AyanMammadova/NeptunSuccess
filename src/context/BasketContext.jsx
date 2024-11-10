@@ -10,6 +10,12 @@ function BasketContext({children}) {
         setBasket([...basket,{id,img,name,count,price,discount}])
         
     }
+    // function removeFromBasket(id){
+    //     const newBasket=basket.filter((item=>item.id!=id))
+    //     setBasket(newBasket)
+    //     console.log(newBasket)
+    // }
+
     useEffect(()=>{
         cooki.set('basket',basket)
     },[basket])

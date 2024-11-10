@@ -3,13 +3,13 @@ import { IoIosArrowForward } from "react-icons/io";
 import { HiMiniBars4 } from "react-icons/hi2";
 import { DATA } from '../../context/DataContext';
 import { Link, useFetcher, useLocation } from 'react-router-dom';
-function Sidebar({isFixed}) {
+function Sidebar() {
     const location = useLocation();
     const [showCategory,setShowCategory]=useState(undefined)
    
-    useEffect(()=>{isFixed ? setShowCategory(false) : setShowCategory(true)},[isFixed])
+    // useEffect(()=>{isFixed ? setShowCategory(false) : setShowCategory(true)},[isFixed])
     useEffect(() => {(location.pathname == '/') ? setShowCategory(true) :setShowCategory(false)}, [location])
-    
+  
     
     const {categoryData}=useContext(DATA)
 
@@ -60,7 +60,7 @@ function Sidebar({isFixed}) {
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
                                             <Link to={`/${subitem.slug}/${subitem.id}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
-                                                <div  className='flex'>
+                                                <div className='flex'>
                                                         <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
                                                 </div>
                                             </Link>
