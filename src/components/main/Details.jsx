@@ -7,7 +7,7 @@ import { BsList } from 'react-icons/bs'
 import { FaArrowsRotate } from 'react-icons/fa6'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { Pagination } from 'antd'
-import Loader from './Loader'
+import ProductLoader from './ProductLoader'
 // import { Pagination } from 'swiper/modules'
 
 
@@ -165,7 +165,7 @@ function Details() {
                   </div>
                 ))
                 :
-                  Array(10).fill('skdbcj').map((_,i)=> <Loader key={i}/>)
+                  Array(10).fill('skdbcj').map((_,i)=> <ProductLoader key={i}/>)
                   
                 }
               </div>

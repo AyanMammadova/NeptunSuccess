@@ -137,6 +137,13 @@ body {
   border-radius: 1px;
 }
 
+.scrollable-table::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollable-table::-webkit-scrollbar-thumb {
+  background: rgb(66, 63, 63); /* Red thumb color */
+  border-radius: 4px; /* Optional: round the thumb */
+}
 body {
   background: #eee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;

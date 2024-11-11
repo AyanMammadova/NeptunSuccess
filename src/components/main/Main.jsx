@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { BsArrowRight } from "react-icons/bs";
-import { FaCarOn, FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa";
-import { CiHeart } from "react-icons/ci";
 import "swiper/css/effect-fade";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -11,14 +8,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
 
-import { DATA } from '../../context/DataContext';
 import Carousel from './Carousel';
+import { DATA } from '../../context/DataContext';
 
 function Main() {
-  const {productData}=useContext(DATA)
-  const {discountData}=useContext(DATA)
-  const {populyarData}=useContext(DATA)
-
+  const {reklamData}=useContext(DATA)
+  console.log(reklamData)
+  
   return (
     <main className='bg-[#F2F2F2]'>
       <div className='lg:ml-[350px] 2xl:ml-[400px]'>
@@ -40,12 +36,17 @@ function Main() {
             modules={[Autoplay, Pagination, Navigation, EffectFade]}
             className="mySwiper"
           >
-            <SwiperSlide><img className='w-[100%] object-contain' src="https://neptun.az/image/cache/webp/catalog/09.18.2024/banner-17-29-oktyabr-kataloq-1130x413.webp?v=9" alt="" /></SwiperSlide>
-            <SwiperSlide><img className='w - [100 %] object - contain' src="https://neptun.az/image/cache/webp/catalog/2.2024/esas-1130x413.webp?v=9" alt="" /></SwiperSlide>
-            <SwiperSlide><img className='w - [100 %] object - contain' src="https://neptun.az/image/cache/webp/catalog/2.2024/heftesonu-banner-cover2-1130x413.webp?v=9" alt="" /></SwiperSlide>
-            <SwiperSlide><img className='w - [100 %] object - contain' src="https://neptun.az/image/cache/webp/catalog/08.09.2024/mainbanner65afaaf3ef334cb2f90f3816-1130x413.webp?v=9" alt="" /></SwiperSlide>
-            <SwiperSlide><img className='w - [100 %] object - contain' src="https://neptun.az/image/cache/webp/catalog/09.18.2024/banner-17-29-oktyabr-kataloq-1130x413.webp?v=9" alt="" /></SwiperSlide>
-          </Swiper >
+            {
+               reklamData ? reklamData.map((item,i)=>{
+                return(
+                  <SwiperSlide key={i}>
+                    <img className='w-[100%] object-contain' src={item} alt="" />
+                  </SwiperSlide>
+                ) 
+              }) : ''
+            }
+            
+        </Swiper >
 
           <div className='flex gap-[10px] justify-between w-[90%]  pb-[50px] mx-[auto]  mt-[20px]'>
             <div className='bg-white'>
@@ -143,7 +144,7 @@ function Main() {
                                               {/*PRODUCT DATA SWIPER */}
         <div className='my-[30px] lg:w-[70%] w-[100%]'>
                                                 
-          <Carousel current={[productData,'product']}/>
+          <Carousel current={'product'}/>
          
         </div>
         
@@ -156,7 +157,7 @@ function Main() {
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
                                                  {/*DISCOUNT DATA SWIPER */}
-        <Carousel current={[discountData,'discount']}/>
+        <Carousel current={'discount'}/>
 
       </div>
       
@@ -167,7 +168,7 @@ function Main() {
           <div className='text-[#FF8300]'>Hamısına bax</div>
         </div>
                                                     {/*POPULYAR DATA SWIPER */}
-        <Carousel current={[populyarData,'popular']}/>
+        <Carousel current={'populyar'}/>
         
       </div>
 

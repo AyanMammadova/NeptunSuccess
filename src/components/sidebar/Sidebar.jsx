@@ -3,13 +3,13 @@ import { IoIosArrowForward } from "react-icons/io";
 import { HiMiniBars4 } from "react-icons/hi2";
 import { DATA } from '../../context/DataContext';
 import { Link, useFetcher, useLocation } from 'react-router-dom';
-function Sidebar({isFixed}) {
+function Sidebar() {
     const location = useLocation();
     const [showCategory,setShowCategory]=useState(undefined)
    
-    useEffect(()=>{isFixed ? setShowCategory(false) : setShowCategory(true)},[isFixed])
+    // useEffect(()=>{isFixed ? setShowCategory(false) : setShowCategory(true)},[isFixed])
     useEffect(() => {(location.pathname == '/') ? setShowCategory(true) :setShowCategory(false)}, [location])
-    
+  
     
     const {categoryData}=useContext(DATA)
 
@@ -32,7 +32,8 @@ function Sidebar({isFixed}) {
         'https://neptun.az/image/catalog/icon-menu/elektronika-v%C9%99-mebel.svg'
     ]
     return (
-        <div className='relative z-10 bg-white rounded-lg  w-[270px]' >
+       <>
+         <div className='relative z-10 bg-white rounded-lg  w-[270px]' >
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
             <p  className={`lg:flex hidden font-[600] h-[50px]  p-[10px] gap-[15px] text-[#FF8300] cursor-pointer`} 
                 onClick={() => setShowCategory(!showCategory)}>
@@ -43,13 +44,13 @@ function Sidebar({isFixed}) {
             <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} z-50 bg-white`} >
                 {
                     categoryData && categoryData.map((item,i)=>{
-                        return <a key={i}
+                        return <li key={i}
                                 className={` ${item.subcategory.length>0 ? 'cursor-text' : 'cursor-auto'}`}
                                 onClick={(event) => 
                                     {if (item.subcategory.length > 0) {event.preventDefault()};
                                     }}
                         >
-                         <li  className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
+                         <div  className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
                             <div className='flex items-center'>
                                 <img key={i} src={iconData[i]} className='text-[#FF8300] text-[1.8em] pr-[10px]' />
                                 <span>{item.categoryName}</span>
@@ -60,7 +61,7 @@ function Sidebar({isFixed}) {
                                     {
                                         item.subcategory?.map((subitem,subi)=>(
                                             <Link to={`/${subitem.slug}/${subitem.id}`} key={subi}  className={` ${item.subcategory.length>0 ? 'block' : 'hidden'}`}>
-                                                <div  className='flex'>
+                                                <div className='flex'>
                                                         <span  className='text-black p-[15px] hover:text-[orange] hover:underline cursor-pointer'>{subitem.categoryName}</span>
                                                 </div>
                                             </Link>
@@ -69,8 +70,8 @@ function Sidebar({isFixed}) {
                             </div> 
                             }
                            
+                        </div>
                         </li>
-                        </a>
                     })
                 }
              
@@ -86,6 +87,7 @@ function Sidebar({isFixed}) {
             </ul>
 
         </div>
+       </>
     )
 }
 
