@@ -17,8 +17,8 @@ async function getDiscounted(){
     const res= await axiosInstance.get("/products/discounted")
     return res.data.products
 }
-async function getProByCat(subid, pageId = 1){
-    const res= await axiosInstance.get(`/products/subcategory/${subid}?page=${pageId}`)
+async function getProByCat(subid, pageId = 1, limitId = 12){
+    const res= await axiosInstance.get(`/products/subcategory/${subid}?page=${pageId}&limit=${limitId}`)
     return res.data
 }
 

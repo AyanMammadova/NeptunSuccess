@@ -15,23 +15,23 @@ import { BASKET } from '../../context/BasketContext'
 
 function Details() {
   const [productsbyCategory, setProductsbyCategory] = useState(null)
-  const { subslug, subname, subid } = useParams()
+  const {subslug, subname, subid } = useParams()
   const [pageId, setPageId] = useState(1)
-  const [limitId, setLimitId] = useState(12)
+  const [limitId, setLimitId] = useState()
   const [priceRange, setPriceRange] = useState(0)
   const [min, setMin] = useState()
   const [max, setMax] = useState()
   const [product, setProduct] = useState()
 
-  
 
-  function handleDCount(id,num){
-    const newData=[...product] 
-    const dProduct=newData.find(item => item.id==id)
-    if(!dProduct.count){
-      dProduct.count=2
+
+  function handleDCount(id, num) {
+    const newData = [...product]
+    const dProduct = newData.find(item => item.id == id)
+    if (!dProduct.count) {
+      dProduct.count = 2
     }
-    else{
+    else {
       dProduct.count += num
     }
     if (dProduct.count < 1) {
@@ -39,7 +39,7 @@ function Details() {
     }
     setProduct(newData)
   }
-  
+
   useEffect(() => {
     getProByCat(subid, pageId, limitId).then(res => {
       setProductsbyCategory(res)
@@ -52,7 +52,7 @@ function Details() {
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => setIsOpen(!isOpen)
-  const {addToBasket}=useContext(BASKET)
+  const { addToBasket } = useContext(BASKET)
 
 
   function filtrQiymet(qiymet) {
@@ -63,6 +63,9 @@ function Details() {
     })
   }
 
+  const handleLimitChange = (e) => {
+    setLimitId(Number(e.target.value))
+  }
 
   return (
     <>
@@ -195,10 +198,16 @@ function Details() {
               </div>
               <div className='flex gap-3 items-center w-full lg:w-auto'>
                 <p className='text-[11px] font-bold'>Göstər:</p>
-                <select className='w-full lg:w-[73px] h-[40px] text-[12px] font-bold border rounded-[24px] px-[15px] py-[9px]'>
-                  {
-                    <option>12</option>
-                  }
+                <select
+                  className='w-full lg:w-[73px] h-[40px] text-[12px] font-bold border rounded-[24px] px-[15px] py-[9px]'
+                  onChange={handleLimitChange}
+                  value={limitId}
+                >
+                  <option value={12}>12</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={75}>75</option>
+                  <option value={100}>100</option>
                 </select>
               </div>
               <button className='flex items-center justify-center gap-1 w-full lg:w-[105px] h-[40px] p-[11px] bg-[#FF8300] text-white border rounded-[24px] text-[11px] font-bold'>
@@ -224,20 +233,20 @@ function Details() {
                         <p className="text-[10px] font-[600]">{item.name}</p>
                         <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
                         <div className='flex justify-center items-center  '>
-                          <FaMinus onClick={(e)=>{
-                            handleDCount(item.id,-1)
+                          <FaMinus onClick={(e) => {
+                            handleDCount(item.id, -1)
                             e.preventDefault()
                           }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
                           <span className='p-[10px] text-[12px]'>{item.count ? item.count : 1} ədəd</span>
-                          <FaPlus onClick={(e)=>{
-                            handleDCount(item.id,1)
+                          <FaPlus onClick={(e) => {
+                            handleDCount(item.id, 1)
                             e.preventDefault()
                           }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
                         </div>
                         <button
-                        onClick={(e)=>{
-                          e.preventDefault()
-                          addToBasket(item.id,item.img[0],item.name,item.count,item.totalPrice,item.discount)
+                          onClick={(e) => {
+                            e.preventDefault()
+                            addToBasket(item.id, item.img[0], item.name, item.count, item.totalPrice, item.discount)
                           }}
                           className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
                           Səbətə at
