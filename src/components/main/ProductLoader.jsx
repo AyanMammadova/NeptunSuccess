@@ -1,8 +1,7 @@
 import React from 'react'
-import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 
-function Loader() {
+function ProductLoader() {
   return (
     <div  className='w-[180px] animate-pulse'>
       <Link >
@@ -25,4 +24,4 @@ function Loader() {
   )
 }
 
-export default Loader
+export default ProductLoader

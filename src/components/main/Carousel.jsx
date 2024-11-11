@@ -12,15 +12,24 @@
   import { FaMinus, FaPlus } from 'react-icons/fa6';
   import { IoCart } from 'react-icons/io5';
   import { BASKET } from '../../context/BasketContext';
+import { DATA } from '../../context/DataContext';
+import ProductLoader from './ProductLoader';
 
   function Carousel({current}) {
-    const [currentData, type] = current
+    const {productData}=useContext(DATA)
+    const {discountData}=useContext(DATA)
+    const {populyarData}=useContext(DATA)
+
+    // const [currentData, current] = current
     const [data,setData]=useState(null)
     const {addToBasket}=useContext(BASKET)
     
     useEffect(()=>{
-      setData(currentData)
-    },[currentData])
+      if (current === 'product') setData(productData);
+      else if (current === 'discount') setData(discountData) 
+      else if(current === 'populyar') setData(populyarData)
+    }, [current, productData, discountData, populyarData])
+
     function handleCount(id,num){
       const newData=[...data] 
       const product=newData.find(item => item.id==id)
@@ -39,7 +48,8 @@
 
     return (
       <>
-      <Swiper 
+      
+        <Swiper 
             slidesPerView={ 2 }
             spaceBetween={10}
             pagination={{
@@ -56,7 +66,7 @@
             }}
             navigation={true}
             // centeredSlides={true}
-            breakpoints={type=='product' ? 
+            breakpoints={current=='product' ? 
               {
                   640: { slidesPerView: 2, spaceBetween: 20 },
                   768: { slidesPerView: 3, spaceBetween: 40 },
@@ -72,7 +82,7 @@
             className="mySwiper2"
           >
             {
-              currentData && currentData.map((item,i) =>
+              data ? data.map((item,i) =>
                 <SwiperSlide key={i} className=' relative'>
                   <div className='text-[30px] absolute hover:text-[#FF8300] top-2 right-2'>
                     <CiHeart />
@@ -82,8 +92,8 @@
                       <img className='rounded-3xl inline-block object-contain w-[100px]' src={item.img} alt="" />
                       <p className='text-[10px] font-[700] overflow-hidden text-ellipsis whitespace-nowrap w-[90%] '>{item.name}</p>
                       
-                      <div className={` items-center justify-center gap-5 ${type=='discount' ? 'flex' : 'hidden'}`}>
-                        <div className={`${type=='discount' ? 'block' : ''}`}>
+                      <div className={` items-center justify-center gap-5 ${current=='discount' ? 'flex' : 'hidden'}`}>
+                        <div className={`${current=='discount' ? 'block' : ''}`}>
                           <button className='endirim text-[12px] border rounded-full py-[8px] px-[3px] bg-[#FFD9C0]'>{item.discount}%</button>
                         </div>
                         <div>
@@ -91,7 +101,7 @@
                           <p className='xl:text-[18px]'>{item.totalPrice.toFixed(2)}₼</p>
                         </div>
                       </div>
-                      <p className={`xl:text-[18px] ${type=='discount' ? 'hidden' : 'block'}`}>{item.price.toFixed(2)}₼</p>
+                      <p className={`xl:text-[18px] ${current=='discount' ? 'hidden' : 'block'}`}>{item.price.toFixed(2)}₼</p>
 
                       <div className='flex justify-center items-center  '>
                           <FaMinus onClick={(e)=>{
@@ -115,10 +125,12 @@
                     </div>
                   </Link>
                   
-                </SwiperSlide>)
+                </SwiperSlide>) 
+              : 
+              Array(10).fill('skdbcj').map((_,i)=> <SwiperSlide key={i}><ProductLoader /></SwiperSlide>)
             } 
 
-          </Swiper>
+        </Swiper>
       </>
     )
   }

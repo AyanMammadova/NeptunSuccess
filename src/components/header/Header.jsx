@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaSearch } from "react-icons/fa"
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoLockClosed } from "react-icons/io5";
@@ -15,6 +15,8 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
+import FullLoader from '../main/FullLoader';
+import { DATA } from '../../context/DataContext';
 
 
 function Header() {
@@ -152,10 +154,16 @@ function Header() {
         setFixed(false)
       }
   };
+  const {categoryData}=useContext(DATA)
 
     return (
         <header  className='relative'>
+          {
+            categoryData ? '' : <FullLoader/>
+          }
+          
             <div>
+              
               <section id='slidingmenu'>
                   <div className={`w-[90%] z-50 relative ${showmenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'} xl:hidden transition-all duration-500`}>
                       <ul className='flex flex-col  h-[100vh] border-r-2 shadow-2xl p-[40px] w-[80%] sm:w-[50%]  bg-white fixed z-50 text-[1em] font-[400] '>
@@ -191,7 +199,7 @@ function Header() {
                   <div className='bp600:w-[87%] w-[95%] m-[auto] flex justify-between'>
                       <div className='flex items-center justify-between sm:justify-start  w-[100%]'>
                           <Link to={'/'}>
-                            <img src="../img/logo.png" className='object-contain bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
+                            <img src="../img/logo.png" className=' object-contain  bp600:mr-[40px] h-[50px] bp600:h-[100px]' alt="" />
                           </Link>
                           <div className='relative w-[150px] bp600:w-[300px] bp600:mr-[30px] xl:w-[500px] border-[1px] rounded-3xl border-[#FF8300] h-[35px] bp600:h-[44px] flex items-center  justify-between' >
                               <FaSearch  className='text-[orange] absolute left-[5px] hidden bp600:block'/>
