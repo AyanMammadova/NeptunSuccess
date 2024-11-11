@@ -17,16 +17,37 @@ function Details() {
   const { subslug, subname, subid } = useParams()
   const [pageId, setPageId] = useState(1)
   const [limitId, setLimitId] = useState(12)
+  const [priceRange, setPriceRange] = useState(0)
+  const [min, setMin] = useState()
+  const [max, setMax] = useState()
+  const [product, setProduct] = useState()
+
+  console.log(priceRange);
+  
 
   useEffect(() => {
     getProByCat(subid, pageId, limitId).then(res => {
       setProductsbyCategory(res)
+      const qiymetler = res.products.map(item => item.price)
+      setMax(Math.max(...qiymetler));
+      setMin(Math.min(...qiymetler));
+      setProduct(res.products)
     })
   }, [subid, pageId, limitId])
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => setIsOpen(!isOpen)
 
+  console.log(product);
+
+
+  function filtrQiymet(qiymet) {
+    const yeniArr = [...product]
+    setProductsbyCategory({
+      ...productsbyCategory.products,
+      products: yeniArr.filter(item => item.price < qiymet),
+    })
+  }
 
 
   return (
@@ -54,11 +75,21 @@ function Details() {
               <p className='text-[#444] text-[11px] font-bold'>Qiymət</p>
               <MdKeyboardArrowDown />
             </div>
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center mb-[10px]'>
               <p className='text-[12px]'>0.00 ₼</p>
-              <p className='text-[12px]'>40.00 ₼</p>
+              <p className='text-[12px]'>{priceRange} ₼</p>
             </div>
-            <input className='mb-[20px] rangeInput w-full appearance-none pt-[20px]' type='range' min={0} max={40} step={0.1} />
+            <input
+              type='range'
+              min={min}
+              max={max}
+              value={priceRange}
+              onChange={(e) => {
+                setPriceRange(+e.target.value)
+                filtrQiymet(+e.target.value)
+              }}
+              className='w-[100%] h-[3px] mb-[30px] rangeInput'
+            />
             <hr />
           </div>
           <button className='mt-[20px] text-center h-[30px] px-[15px] bg-[#FF8300] text-white border rounded-[24px] text-[11px] font-bold'>
@@ -104,11 +135,21 @@ function Details() {
                   <p className='text-[#444] text-[11px] font-bold'>Qiymət</p>
                   <MdKeyboardArrowDown />
                 </div>
-                <div className='flex justify-between items-center'>
+                <div className='flex justify-between items-center mb-[10px]'>
                   <p className='text-[12px]'>0.00 ₼</p>
-                  <p className='text-[12px]'>40.00 ₼</p>
+                  <p className='text-[12px]'>{priceRange} ₼</p>
                 </div>
-                <input className='mb-[20px] rangeInput w-full appearance-none pt-[20px]' type='range' min={0} max={40} step={0.1} />
+                <input
+                  type='range'
+                  min={min}
+                  max={max}
+                  value={priceRange}
+                  onChange={(e) => {
+                    setPriceRange(+e.target.value)
+                    filtrQiymet(+e.target.value)
+                  }}
+                  className='w-[100%] h-[3px] mb-[30px] rangeInput'
+                />
                 <hr />
               </div>
               <button className='mt-[20px] text-center h-[30px] px-[15px] bg-[#FF8300] text-white border rounded-[24px] text-[11px] font-bold'>
@@ -127,7 +168,15 @@ function Details() {
               <div className='flex gap-3 items-center w-full lg:w-auto'>
                 <p className='text-[11px] font-bold'>Sırala:</p>
                 <select className='w-full lg:w-[200px] h-[40px] text-[12px] font-bold border rounded-[24px] px-[15px] py-[9px]'>
-                  <option>Əsas</option>
+                  <option value="">Əsas</option>
+                  <option value="">Ad (A - Z)</option>
+                  <option value="">Ad (Z - A)</option>
+                  <option value="">Qiymət (Aşağıdan - Yuxarıya)</option>
+                  <option value="">Qiymət (Yuxarıdan - Aşağıya)</option>
+                  <option value="">Reytinq (Yuxarı)</option>
+                  <option value="">Reytinq (Aşağı)</option>
+                  <option value="">Model (A - Z)</option>
+                  <option value="">Model (Z - A)</option>
                 </select>
               </div>
               <div className='flex gap-3 items-center w-full lg:w-auto'>
