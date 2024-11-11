@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { FaMinus, FaPlus, FaRegStar } from 'react-icons/fa'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
 import { LuCheckSquare } from 'react-icons/lu'
@@ -18,6 +19,9 @@ function ProductById() {
     
   return (
     <>
+    <Helmet>
+      <title>{name}</title>
+    </Helmet>
     <div className='w-[80%] my-[60px] mx-auto'>
         <div >
             <ul className='text-[#6c6c6c] text-[13px] font-bold flex m-[20px] gap-2 items-center'>

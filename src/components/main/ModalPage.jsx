@@ -1,10 +1,14 @@
 import React, { useContext } from 'react'
 import { BASKET } from '../../context/BasketContext'
+import { Helmet } from 'react-helmet'
 
 function ModalPage() {
     const {basket}=useContext(BASKET)
   return (
     <>
+    <Helmet>
+        <title>Səbət</title>
+    </Helmet>
       <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
             <h2 className="mb-4 text-2xl font-semibold leading-tight">Invoices</h2>
             <div className="overflow-x-auto">

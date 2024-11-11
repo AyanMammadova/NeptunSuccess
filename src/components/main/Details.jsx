@@ -8,6 +8,7 @@ import { FaArrowsRotate } from 'react-icons/fa6'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { Pagination } from 'antd'
 import ProductLoader from './ProductLoader'
+import { Helmet } from 'react-helmet'
 // import { Pagination } from 'swiper/modules'
 
 
@@ -28,6 +29,9 @@ function Details() {
 
   return (
     <>
+    <Helmet>
+      <title>{subname}</title>
+    </Helmet>
       <div className={`fixed inset-0 bg-black transition-opacity ${isOpen ? 'opacity-50' : 'opacity-0 pointer-events-none'}`} onClick={toggleSidebar}></div>
         <div className={`fixed left-0 top-0 w-64 bg-white h-full shadow-md transition-transform duration-500 ease-in-out transform ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className=" bg-white p-[20px] flex flex-col">

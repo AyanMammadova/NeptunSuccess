@@ -7,26 +7,32 @@ import Error from './components/Error'
 import ProductById from './components/main/ProductById'
 import ModalPage from './components/main/ModalPage'
 import { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 function App() {
   const { pathname } = useLocation()
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo({
-      behavior:'smooth',
-      top: 0 
+      behavior: 'smooth',
+      top: 0
     })
-  },[pathname])
+  }, [pathname])
   return (
+    <>
+    <Helmet>
+      <title>Neptun</title>
+    </Helmet>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path='/:subslug/:subname/:subid' element={<Details/>} />
-          <Route path='/:name/:proid' element={<ProductById/>} />
-          <Route path='/basket' element={<ModalPage/>} />
+          <Route path='/:subslug/:subname/:subid' element={<Details />} />
+          <Route path='/:name/:proid' element={<ProductById />} />
+          <Route path='/basket' element={<ModalPage />} />
 
         </Route>
-        <Route path='*' element={<Error/>} />
+        <Route path='*' element={<Error />} />
       </Routes>
+    </>
   )
 }
 
