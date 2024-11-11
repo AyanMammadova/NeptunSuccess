@@ -4,25 +4,23 @@ import { FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { BASKET } from '../../context/BasketContext';
 
-function Modal({status}) {
-  const [m,setM]=useState(status)
+function Modal({status,setModal}) {
 
-  useEffect(()=>{
-    setM(status)
-  },[status])
+  // useEffect(()=>{
+  //   setM(status)
+  // },[status])
 
   const {basket}=useContext(BASKET)
   const {removeFromBasket}=useContext(BASKET)
-  console.log(m)
   const {totalAllAmount}=useContext(BASKET)
   return (
     <div
-    className={`${m ? 'block' : 'hidden'}  inset-0 absolute border-t-[6px] border-orange-600 top-[50px] md:-left-[300px] -left-[200px] w-[320px] bg-black bg-opacity-20 z-50 `}>
+    className={`inset-0 absolute border-t-[6px] border-orange-600 top-[50px] md:-left-[300px] -left-[200px] w-[280px] bp500:w-[320px] bg-black bg-opacity-20 z-50 `}>
       <div className="max-w-sm  w-full bg-white  shadow-lg p-1 relative">
         <button className="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-2xl">
-          <AiTwotoneCloseSquare onClick={()=>{setM(!m)}} />
+          <AiTwotoneCloseSquare onClick={()=>{setModal(false)}} />
         </button>
-        <div className="overflow-y-scroll max-h-[300px] mt-[40px] scrollable-table">
+        <div className="overflow-y-scroll max-h-[300px]  mt-[40px] scrollable-table">
         <table className="w-full border-collapse">
           <tbody>
             {
@@ -68,10 +66,10 @@ function Modal({status}) {
 
         <div className="flex justify-between">
           <Link to={'/basket'}>
-            <button onClick={()=>{setM(!status)}} className="bg-gray-500 text-white px-4 py-2 rounded-md">Səbət</button>
+            <button onClick={()=>setModal(false)} className="bg-gray-500 text-white px-4 py-2 rounded-md">Səbət</button>
           </Link>
-          <Link>
-            <button onClick={()=>{setM(!status)}} className="bg-[#FF8300] text-white px-4 py-2 rounded-md">Sifarişi rəsmiləşdir</button>
+          <Link to={'/checkout'}>
+            <button onClick={()=>setModal(false)} className="bg-[#FF8300] text-white px-4 py-2 rounded-md">Sifarişi rəsmiləşdir</button>
           </Link>
         </div>
 

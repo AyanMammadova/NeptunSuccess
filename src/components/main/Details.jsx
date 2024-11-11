@@ -5,7 +5,7 @@ import { getProByCat } from '../../services/api'
 import { PiSquaresFourFill } from 'react-icons/pi'
 import { BsList } from 'react-icons/bs'
 import { FaArrowsRotate } from 'react-icons/fa6'
-import { FaMinus, FaPlus } from 'react-icons/fa'
+import { FaMinus, FaPlus, FaRegStar } from 'react-icons/fa'
 import { Pagination } from 'antd'
 import ProductLoader from './ProductLoader'
 import { Helmet } from 'react-helmet'
@@ -22,6 +22,7 @@ function Details() {
   const [min, setMin] = useState()
   const [max, setMax] = useState()
   const [product, setProduct] = useState()
+  const [design,setDesign]=useState('cedvel')
 
 
 
@@ -175,11 +176,11 @@ function Details() {
             </div>
           </div>
         </div>
-        <div className='flex flex-col lg:w-[80%] mt-[10px] lg:mt-[55px] gap-4'>
+        <div className='flex flex-col lg:w-[80%] mx-[auto] mt-[10px] lg:mt-[55px] gap-4'>
           <div className='flex justify-between items-center px-[20px]'>
             <div className='hidden lg:flex gap-3 items-center'>
-              <PiSquaresFourFill className='text-[#FF8300] text-[30px]' />
-              <BsList className='text-[30px]' />
+              <PiSquaresFourFill onClick={()=>{setDesign('cedvel')}} className='text-[#FF8300] cursor-pointer text-[30px]' />
+              <BsList onClick={()=>{setDesign('siyahi')}} className='text-[30px] cursor-pointer' />
             </div>
             <div className='flex flex-col lg:flex-row justify-start lg:justify-between items-start lg:items-center gap-3 w-full lg:w-min'>
               <div className='flex gap-3 items-center w-full lg:w-auto'>
@@ -219,40 +220,48 @@ function Details() {
 
 
           <div className="flex flex-col justify-center items-center space-x-1 mt-[30px]">
-            <div className='flex bp400:justify-center  justify-around flex-wrap gap-[20px]'>
+            <div className={`${design=='cedvel' ? 'flex-row' : ' flex-row lg:flex-col'} flex  bp400:justify-center  justify-around flex-wrap gap-[20px]`}>
               {
                 productsbyCategory ? productsbyCategory.products.map((item, id) => (
-                  <div key={item.id || id} className='w-[180px]'>
-                    <Link to={`/${item.name}/${item.id}`}>
-                      <div className="bg-white text-center rounded-2xl h-[100%] py-[20px] px-[20px]">
-                        <img
-                          className="rounded-3xl max-w-[250px] m-auto inline-block w-[100px]"
-                          src={item.img}
-                          alt={item.name}
-                        />
-                        <p className="text-[10px] font-[600]">{item.name}</p>
-                        <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
-                        <div className='flex justify-center items-center  '>
-                          <FaMinus onClick={(e) => {
-                            handleDCount(item.id, -1)
-                            e.preventDefault()
-                          }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
-                          <span className='p-[10px] text-[12px]'>{item.count ? item.count : 1} ədəd</span>
-                          <FaPlus onClick={(e) => {
-                            handleDCount(item.id, 1)
-                            e.preventDefault()
-                          }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
+                  <div key={item.id || id} className={`${design=='siyahi' ? 'lg:w-[80%] flex flex-row justify-between' : ''} w-[180px]`}>
+                    <div>
+                      <Link to={`/${item.name}/${item.id}`}>
+                        <div className={`${design=='siyahi' ? 'lg:flex bg-[#00000000]' : '  bg-white'} bg-white text-center  rounded-2xl h-[100%] py-[10px] px-[20px]`}>
+                          <img
+                            className={`${design=='siyahi' ? ' lg:h-[300px]' : ' max-w-[250px] w-[100px] rounded-3xl'}   m-auto inline-block `}
+                            src={item.img}
+                            alt={item.name}
+                          />
+                          <div className={`flex flex-col justify-center  gap-[20px] ${design=='siyahi' ? 'lg:px-[80px] text-start' : ''}  `}>
+                            <p className="text-[10px] font-[600]">{item.name}</p>
+                            <div className={`${design=='siyahi' ? 'lg:flex' : ''} hidden gap-[5px] text-[1em] text-[#ce9d68] hover:text-[#FF8300] w-[200px]`}>
+                              <FaRegStar /><FaRegStar /><FaRegStar /><FaRegStar /><FaRegStar />
+                            </div>
+                            <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
+                            <div className={`flex ${design=='siyahi' ? '' : 'justify-center'} items-center  `}>
+                              <FaMinus onClick={(e) => {
+                                handleDCount(item.id, -1)
+                                e.preventDefault()
+                              }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
+                              <span className='p-[10px] text-[12px]'>{item.count ? item.count : 1} ədəd</span>
+                              <FaPlus onClick={(e) => {
+                                handleDCount(item.id, 1)
+                                e.preventDefault()
+                              }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
+                            </div>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault()
+                                addToBasket(item.id, item.img[0], item.name, item.count, item.totalPrice, item.discount)
+                              }}
+                              className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                              Səbətə at
+                            </button>
+                          </div>
                         </div>
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault()
-                            addToBasket(item.id, item.img[0], item.name, item.count, item.totalPrice, item.discount)
-                          }}
-                          className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
-                          Səbətə at
-                        </button>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
+                    <div></div>
                   </div>
                 ))
                   :

@@ -19,6 +19,9 @@ function CheckOut() {
             <IoIosArrowForward  />
         </div>
       </div>
+      öde pulunu
+      <div className='min-h-[50vh]'></div>
+      
     </>
   )
 }
