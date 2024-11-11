@@ -8,6 +8,7 @@ import ProductById from './components/main/ProductById'
 import ModalPage from './components/main/ModalPage'
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import CheckOut from './components/main/CheckOut'
 
 function App() {
   const { pathname } = useLocation()
@@ -28,6 +29,7 @@ function App() {
           <Route path='/:subslug/:subname/:subid' element={<Details />} />
           <Route path='/:name/:proid' element={<ProductById />} />
           <Route path='/basket' element={<ModalPage />} />
+          <Route path='/checkout' element={<CheckOut />} />
 
         </Route>
         <Route path='*' element={<Error />} />

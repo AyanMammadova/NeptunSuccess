@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { FaMinus, FaPlus, FaRegStar } from 'react-icons/fa'
 import { GoHeart, GoHeartFill } from 'react-icons/go'
@@ -7,15 +7,28 @@ import { LuCheckSquare } from 'react-icons/lu'
 import { MdKeyboardArrowRight } from 'react-icons/md'
 import { SlRefresh } from 'react-icons/sl'
 import { Link, useParams } from 'react-router-dom'
+import { BASKET } from '../../context/BasketContext'
 
 function ProductById() {
   const {name,proid}=useParams()
   const [isfilled,setIsfilled]=useState('')
   const [product,setProduct]=useState(null)
+  const {addToBasket}=useContext(BASKET)
   useEffect(()=>{
     axios.get(`https://neptunbk.vercel.app/products/${proid}`)
-    .then(res=>setProduct(res.data))
+    .then(res=>{
+      const pData=res.data
+      pData.count=pData.count || 1
+      setProduct(pData)
+    })
   },[])
+  function handlePCount(id,num){
+    const newproduct={...product}
+    
+      newproduct.count+=num
+    setProduct(newproduct)
+    
+  }
     
   return (
     <>
@@ -29,7 +42,7 @@ function ProductById() {
                 <Link to={'/'}> Ana Səhifə</Link>
               </li>
               <li className='flex items-center'><MdKeyboardArrowRight />
-                <a href='#'> {name}</a>
+                <a> {name}</a>
               </li>
               
             </ul>
@@ -69,14 +82,23 @@ function ProductById() {
             <p className='w-[200px] flex justify-between'><span>Model:</span><span>008123</span></p>
             <p className='w-[225px] justify-between flex items-center'><span>Mövcudluq:</span><span className='flex items-center gap-[4px]'><LuCheckSquare  />Anbarda</span></p>
             <p className='text-[2em] text-[#FF8300] font-[600]'>{product?.price} ₼</p>
-            <div className='flex gap-[20px] items-center '>
-                <FaMinus className='text-[#FF8300] cursor-pointer' />
-                <span className='p-[10px] text-[12px]'>1ədəd</span>
-                <FaPlus className='text-[#FF8300] cursor-pointer' />
+            <div className='flex justify-center items-center  '>
+                <FaMinus onClick={(e)=>{
+                  handlePCount(product.id,-1)
+                  e.preventDefault()
+                }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
+                <span className='p-[10px] text-[12px]'>{product ? product.count : 1} ədəd</span>
+                <FaPlus onClick={(e)=>{
+                  handlePCount(product.id,1)
+                  e.preventDefault()
+                }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
             </div>
             <div className='flex gap-[30px]'>
               <button 
-              className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] hidden lg:block'>Səbətə at</button>
+                onClick={()=>{addToBasket(product.id,product.img,product.name,product.count,product.price,product.discount)}}
+                className='text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300] '>
+                  Səbətə at
+              </button>
               <div className='flex p-[0px] items-center gap-[10px] text-[#FF8300]'>
                   <div onMouseEnter={()=>setIsfilled(true)}
                             onMouseLeave={()=>setIsfilled(false)}>

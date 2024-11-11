@@ -12,8 +12,9 @@ function Modal({status}) {
   },[status])
 
   const {basket}=useContext(BASKET)
+  const {removeFromBasket}=useContext(BASKET)
   console.log(m)
-  const totalAmount = basket.reduce((total, item) => total + item.count * item.price, 0)
+  const {totalAllAmount}=useContext(BASKET)
   return (
     <div
     className={`${m ? 'block' : 'hidden'}  inset-0 absolute border-t-[6px] border-orange-600 top-[50px] md:-left-[300px] -left-[200px] w-[320px] bg-black bg-opacity-20 z-50 `}>
@@ -26,7 +27,7 @@ function Modal({status}) {
           <tbody>
             {
               basket && basket.map((item, i) => (
-                <tr key={i} className="border-b pb-4 mb-4">
+                <tr key={i} className="border-b py-4 mb-4">
                   <td className="flex gap-[5px] items-center">
                     <img src={item.img} alt="Product" className="h-[40px] rounded-md mr-[2px]" />
                     <div className='w-[90%]'>
@@ -44,7 +45,9 @@ function Modal({status}) {
                   </td>
 
                   <td>
-                    <button className="text-gray-500 hover:text-red-500 text-lg">
+                    <button 
+                    onClick={()=>{removeFromBasket(item.id)}}
+                    className="text-gray-500 cursor-pointer hover:text-[#DE7200] text-lg">
                       <FiTrash2 />
                     </button>
                   </td>
@@ -60,7 +63,7 @@ function Modal({status}) {
 
         <div className="flex text-black justify-between items-center font-semibold text-lg mb-4">
           <p>Ümumi məbləğ:</p>
-          <p>{totalAmount.toFixed(2)}</p>
+          <p>{totalAllAmount.toFixed(2)}</p>
         </div>
 
         <div className="flex justify-between">

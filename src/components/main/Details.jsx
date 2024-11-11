@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
 import { getProByCat } from '../../services/api'
@@ -9,6 +9,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa'
 import { Pagination } from 'antd'
 import ProductLoader from './ProductLoader'
 import { Helmet } from 'react-helmet'
+import { BASKET } from '../../context/BasketContext'
 // import { Pagination } from 'swiper/modules'
 
 
@@ -22,9 +23,23 @@ function Details() {
   const [max, setMax] = useState()
   const [product, setProduct] = useState()
 
-  console.log(priceRange);
   
 
+  function handleDCount(id,num){
+    const newData=[...product] 
+    const dProduct=newData.find(item => item.id==id)
+    if(!dProduct.count){
+      dProduct.count=2
+    }
+    else{
+      dProduct.count += num
+    }
+    if (dProduct.count < 1) {
+      dProduct.count = 1;
+    }
+    setProduct(newData)
+  }
+  
   useEffect(() => {
     getProByCat(subid, pageId, limitId).then(res => {
       setProductsbyCategory(res)
@@ -37,8 +52,7 @@ function Details() {
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleSidebar = () => setIsOpen(!isOpen)
-
-  console.log(product);
+  const {addToBasket}=useContext(BASKET)
 
 
   function filtrQiymet(qiymet) {
@@ -209,12 +223,23 @@ function Details() {
                         />
                         <p className="text-[10px] font-[600]">{item.name}</p>
                         <p className="xl:text-[18px]">{item.price.toFixed(2)}₼</p>
-                        <div className="flex justify-center items-center">
-                          <FaMinus className="text-[#FF8300] cursor-pointer" />
-                          <span className="p-[10px] text-[12px]">1 ədəd</span>
-                          <FaPlus className="text-[#FF8300] cursor-pointer" />
+                        <div className='flex justify-center items-center  '>
+                          <FaMinus onClick={(e)=>{
+                            handleDCount(item.id,-1)
+                            e.preventDefault()
+                          }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
+                          <span className='p-[10px] text-[12px]'>{item.count ? item.count : 1} ədəd</span>
+                          <FaPlus onClick={(e)=>{
+                            handleDCount(item.id,1)
+                            e.preventDefault()
+                          }} className='text-[#FF8300] cursor-pointer text-[1.5em] ' />
                         </div>
-                        <button className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
+                        <button
+                        onClick={(e)=>{
+                          e.preventDefault()
+                          addToBasket(item.id,item.img[0],item.name,item.count,item.totalPrice,item.discount)
+                          }}
+                          className="text-white py-[3px] px-[15px] rounded-2xl bg-[#FF8300]">
                           Səbətə at
                         </button>
                       </div>

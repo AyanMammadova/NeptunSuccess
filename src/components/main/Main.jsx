@@ -13,7 +13,6 @@ import { DATA } from '../../context/DataContext';
 
 function Main() {
   const {reklamData}=useContext(DATA)
-  console.log(reklamData)
   
   return (
     <main className='bg-[#F2F2F2]'>

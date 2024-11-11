@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import FullLoader from '../main/FullLoader';
 import { DATA } from '../../context/DataContext';
+import { BASKET } from '../../context/BasketContext';
 
 
 function Header() {
@@ -132,6 +133,8 @@ function Header() {
     const [isfilled,setIsfilled]=useState('')
     const [fixed,setFixed]=useState(false)
     const [modal,setModal]=useState(false)
+    const {basket}=useContext(BASKET)
+    const totalCount = basket.reduce((counts, item) => counts + item.count, 0)
     function handlesidemenu(){
       handlecategorymenu()
         setShowmenu(!showmenu)
@@ -240,7 +243,7 @@ function Header() {
                           ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
                           
                           xl:hidden transition-all duration-500`}>
-                          <Sidebar/>
+                          <Sidebar isFixed={fixed}/>
 
                       </div>
                       <div id='menu' className='hidden xl:flex'>
@@ -283,7 +286,7 @@ function Header() {
                               <div className='relative'>
                                   <div  onClick={()=>{setModal(!modal)}} >
                                   <MdOutlineShoppingCart  className='text-[1.5em] cursor-pointer'/>
-                                  <div className=' absolute bg-[#00FF00] px-[3px] py-0 text-black text-[.8em] -right-[5px] -top-[13px] rounded-lg'>0</div>
+                                  <div className=' absolute bg-[#00FF00] px-[3px] py-0 text-black text-[.8em] -right-[5px] -top-[13px] rounded-lg'>{totalCount}</div>
                                   
                                   </div>
                                   <div className={`${modal ? 'block' : 'hidden'}`}>
