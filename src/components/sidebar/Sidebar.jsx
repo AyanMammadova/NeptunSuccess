@@ -12,6 +12,8 @@ function Sidebar({f,status,setShowcategorymenu}) {
     useEffect(() => {
         if (f) {
             setShowc(false)
+        }else{
+            setShowc(true)
         }
     }, [f])
     console.log(f)
