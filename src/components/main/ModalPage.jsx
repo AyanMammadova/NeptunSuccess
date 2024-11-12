@@ -11,10 +11,7 @@ function ModalPage() {
     const { removeFromBasket } = useContext(BASKET)
     const { basket } = useContext(BASKET)
     const { totalAllAmount } = useContext(BASKET)
-    const [number, setNumber] = useState(1)
-    function handleRefresh(num) {
-        setNumber(num)
-    }
+    const {handleRefresh}=useContext(BASKET)
 
     return (
         <>
@@ -68,7 +65,7 @@ function ModalPage() {
                                         <td className=" flex items-center h-[90px] gap-[5px]">
                                             <input className=' py-[8px] rounded-3xl w-[70px] text-center'
                                                 type="number"
-                                                onChange={(e) => { handleRefresh(e.target.value) }}
+                                                onChange={(e) => handleRefresh(item.id, parseInt(e.target.value))}
                                                 value={item.count} />
                                             <button className='py-[4px] text-[2em] text-white bg-[#DE7200] rounded-3xl w-[70px]'>
                                                 <BiRefresh className='m-[auto]' />

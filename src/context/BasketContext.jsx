@@ -4,10 +4,10 @@
     export const BASKET=createContext(null)
     function BasketContext({children}) {
         const cooki=new Cookies()
+        const [number,setNumber]=useState(null)
         const [basket,setBasket]=useState(cooki.get('basket') || [])
         const totalAllAmount = basket.reduce((total, item) => total + item.count * item.price, 0)
         function addToBasket(id,img,name,count=1,price,discount){
-
             const totalAmount=count*price
             if(basket.some(item=>item.id==id)){
                 setBasket(basket.map(item=>
@@ -22,7 +22,13 @@
         function removeFromBasket(id){
             const newBasket=basket.filter((item=>item.id!=id))
             setBasket(newBasket)
-            console.log(newBasket)
+        }
+        function handleRefresh(id,newcount){
+            setBasket(basket.map(item=>
+                item.id==id
+                ? {...item, count:newcount,totalAmount:newcount*item.price}
+                : item
+            ))
         }
 
         useEffect(()=>{
@@ -31,7 +37,7 @@
         return (
             <div>
                 <BASKET.Provider
-                value={{basket,setBasket,addToBasket,removeFromBasket,totalAllAmount}}>
+                value={{basket,setBasket,addToBasket,removeFromBasket,totalAllAmount,handleRefresh}}>
                     {children}
                 </BASKET.Provider>
             </div>

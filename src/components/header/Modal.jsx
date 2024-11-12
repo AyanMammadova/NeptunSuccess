@@ -6,9 +6,6 @@ import { BASKET } from '../../context/BasketContext';
 
 function Modal({status,setModal}) {
 
-  // useEffect(()=>{
-  //   setM(status)
-  // },[status])
 
   const {basket}=useContext(BASKET)
   const {removeFromBasket}=useContext(BASKET)

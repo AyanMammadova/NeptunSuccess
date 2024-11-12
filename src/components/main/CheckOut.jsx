@@ -1,10 +1,14 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { IoIosArrowForward } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 
 function CheckOut() {
   return (
     <>
+      <Helmet>
+          <title>CheckOut</title>
+      </Helmet>
       <div className='flex p-[20px]'>
         <div className='flex justify-between items-center pb-[20px]'>
             <Link to={'/'} className='text-[#444] text-[14px] font-bold'>Ana səhifə</Link>

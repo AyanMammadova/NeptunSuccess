@@ -3,14 +3,14 @@ import { IoIosArrowForward } from "react-icons/io";
 import { HiMiniBars4 } from "react-icons/hi2";
 import { DATA } from '../../context/DataContext';
 import { Link, useLocation } from 'react-router-dom';
-function Sidebar({isFixed}) {
+function Sidebar({status,setShowcategorymenu}) {
     
     const location = useLocation();
-    const [showCategory,setShowCategory]=useState(isFixed)
+    const [showc,setShowc]=useState(status)
    
-    useEffect(()=>{isFixed ? setShowCategory(false) : setShowCategory(true)},[isFixed])
-    useEffect(() => {(location.pathname == '/') ? setShowCategory(true) :setShowCategory(false)}, [location])
-  
+    useEffect(() => {
+        location.pathname === '/' ? setShowc(true) : setShowc(false);
+      }, [location, setShowc]);
     
     const {categoryData}=useContext(DATA)
 
@@ -34,15 +34,18 @@ function Sidebar({isFixed}) {
     ]
     return (
        <>
-         <div className='relative z-10 bg-white rounded-lg  w-[270px]' >
+         <div className={`relative z-10 bg-white rounded-lg  w-[270px] `} >
             <div className='rounded-t-lg h-[10px] bg-[#FF8300] lg:block hidden'> </div>
-            <p  className={`lg:flex hidden font-[600] h-[50px]  p-[10px] gap-[15px] text-[#FF8300] cursor-pointer`} 
-                onClick={() => setShowCategory(!showCategory)}>
-                <HiMiniBars4   className='text-[1.5em] '/> Kategoriyalar
-            </p>  
-            <div className={`rounded-b-lg h-[10px] bg-[#FF8300] hidden  z-10  ${showCategory ? 'hidden' : 'block'}`}> </div>  
+            <p
+                className="lg:flex hidden font-[600] h-[50px] p-[10px] gap-[15px] text-[#FF8300] cursor-pointer"
+                onClick={() => setShowc(!showc)}
+                >
+                <HiMiniBars4 className="text-[1.5em]" /> Kategoriyalar
+            </p>
+  
+            <div className={`rounded-b-lg h-[10px] bg-[#FF8300] hidden  z-10  `}> </div>  
             
-            <ul className={`text-black  ${showCategory ? 'block' : 'hidden'} z-50 bg-white`} >
+            <ul className={`text-black  ${showc ? 'block' : 'hidden'} z-50 bg-white`} >
                 {
                     categoryData && categoryData.map((item,i)=>{
                         return <li key={i}
@@ -83,7 +86,7 @@ function Sidebar({isFixed}) {
                 </div>
             
             </li>
-            
+
 
             </ul>
 

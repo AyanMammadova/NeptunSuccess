@@ -239,11 +239,11 @@ function Header() {
                               <Sidebar/>
                           </div>
                       </div>
-                      <div id='slidingcategory'  className={`absolute top-[150px] left-[0px] ${fixed ? 'top-[49px]' : ''} z-40 h-full w-[40%] lg:hidden
+                      <div id='slidingcategory'  className={`absolute top-[100px] bp600:top-[150px] left-[0px] ${fixed ? 'top-[47px]' : ''} z-40 h-full w-[40%] lg:hidden
                           ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
                           
                           xl:hidden transition-all duration-500`}>
-                          <Sidebar isFixed={fixed}/>
+                          <Sidebar status={showcategorymenu}  setShowcategory={setShowcategorymenu}/>
 
                       </div>
                       <div id='menu' className='hidden xl:flex'>
