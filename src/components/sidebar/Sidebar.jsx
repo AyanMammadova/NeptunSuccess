@@ -11,9 +11,10 @@ function Sidebar({f,status,setShowcategorymenu}) {
   
     useEffect(() => {
         if (f) {
-            setShowc(true)
+            setShowc(false)
         }
     }, [f])
+    console.log(f)
     useEffect(() => {
         location.pathname == '/' ? setShowc(true) : setShowc(false)
       }, [location, setShowc])

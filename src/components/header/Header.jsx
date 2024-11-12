@@ -236,7 +236,7 @@ function Header() {
                               <BiMenuAltLeft className='block lg:hidden text-[2em] bp600:text-[3em] mt-[15px] bp600:mt-[10px] cursor-pointer' />
                           </div>                 
                           <div className={`hidden lg:block  `}>
-                              <Sidebar/>
+                              <Sidebar  f={fixed} status={showcategorymenu}  setShowcategory={setShowcategorymenu}/>
                           </div>
                       </div>
                       <div id='slidingcategory'  className={`absolute top-[100px] bp600:top-[150px] left-[0px] ${fixed ? 'top-[47px]' : ''} z-40 h-full w-[40%] lg:hidden
