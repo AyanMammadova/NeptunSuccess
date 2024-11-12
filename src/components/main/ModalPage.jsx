@@ -67,9 +67,7 @@ function ModalPage() {
                                                 type="number"
                                                 onChange={(e) => handleRefresh(item.id, parseInt(e.target.value))}
                                                 value={item.count} />
-                                            <button className='py-[4px] text-[2em] text-white bg-[#DE7200] rounded-3xl w-[70px]'>
-                                                <BiRefresh className='m-[auto]' />
-                                            </button>
+                                            
                                             <button
                                                 onClick={() => { removeFromBasket(item.id) }}
                                                 className='py-[4px] text-[2em] text-white bg-[#D9534F] rounded-3xl w-[70px]'>

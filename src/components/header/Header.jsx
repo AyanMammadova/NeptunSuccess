@@ -243,7 +243,7 @@ function Header() {
                           ${showcategorymenu ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}
                           
                           xl:hidden transition-all duration-500`}>
-                          <Sidebar status={showcategorymenu}  setShowcategory={setShowcategorymenu}/>
+                          <Sidebar f={fixed} status={showcategorymenu}  setShowcategory={setShowcategorymenu}/>
 
                       </div>
                       <div id='menu' className='hidden xl:flex'>

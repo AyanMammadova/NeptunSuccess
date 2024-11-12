@@ -3,14 +3,20 @@ import { IoIosArrowForward } from "react-icons/io";
 import { HiMiniBars4 } from "react-icons/hi2";
 import { DATA } from '../../context/DataContext';
 import { Link, useLocation } from 'react-router-dom';
-function Sidebar({status,setShowcategorymenu}) {
+function Sidebar({f,status,setShowcategorymenu}) {
     
-    const location = useLocation();
+    const location = useLocation()
     const [showc,setShowc]=useState(status)
-   
+    
+  
     useEffect(() => {
-        location.pathname === '/' ? setShowc(true) : setShowc(false);
-      }, [location, setShowc]);
+        if (f) {
+            setShowc(true)
+        }
+    }, [f])
+    useEffect(() => {
+        location.pathname == '/' ? setShowc(true) : setShowc(false)
+      }, [location, setShowc])
     
     const {categoryData}=useContext(DATA)
 
@@ -51,7 +57,7 @@ function Sidebar({status,setShowcategorymenu}) {
                         return <li key={i}
                                 className={` ${item.subcategory.length>0 ? 'cursor-text' : 'cursor-auto'}`}
                                 onClick={(event) => 
-                                    {if (item.subcategory.length > 0) {event.preventDefault()};
+                                    {if (item.subcategory.length > 0) {event.preventDefault()}
                                     }}
                         >
                          <div  className='relative flex justify-between text-[.8em] font-[600] p-[10px] items-center hover:bg-[#FED9BE] group'>
