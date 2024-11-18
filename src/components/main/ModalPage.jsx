@@ -53,8 +53,8 @@ function ModalPage() {
                             {
                                 basket && basket.map((item, i) => {
                                     return <tr key={i} className=" *:border *:border-[#DEDEDE] border-b border-opacity-20 dark:border-gray-300 dark:bg-gray-50">
-                                        <td className="py-[20px]">
-                                            <img className='h-[50px] mx-[auto]' src={item.img} alt="" />
+                                        <td className="">
+                                            <img className='h-[70px] mx-[auto]' src={item.img} alt="" />
                                         </td>
                                         <td className="p-3">
                                             <p>{item.name}</p>
